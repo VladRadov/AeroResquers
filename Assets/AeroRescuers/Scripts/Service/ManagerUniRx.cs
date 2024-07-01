@@ -11,7 +11,18 @@ public static class ManagerUniRx
     public static void AddObjectDisposable(IDisposable disposable) =>
         _objectsForDispose.Add(disposable);
 
-    public static void Dispose(IDisposable disposable)
+    public static void Dispose<T>(ReactiveCommand<T> command)
+    {
+        if (command.IsDisposed)
+            return;
+
+        Dispose(command);
+    }
+
+    public static void Dispose<T>(ReactiveProperty<T> property)
+        => Dispose(property);
+
+    private static void Dispose(IDisposable disposable)
     {
         _objectsForDispose.Remove(disposable);
         disposable.Dispose();

@@ -12,4 +12,14 @@ public class PlaneController
         _plane = plane;
         _planeView = planeView;
     }
+
+    public void FlyingUp()
+    {
+        _planeView.UpdateForce(_plane.ForceUp);
+    }
+
+    public void OnWinLevel()
+    {
+        _planeView.SetBodyType(RigidbodyType2D.Static);
+    }
 }
