@@ -12,6 +12,7 @@ public class LevelEntity : Entity
     [SerializeField] private FrameMapEntity _frameMapEntityPrefab;
     [SerializeField] private List<SkydiverEntity> _skydiverEntities;
     [SerializeField] private MoneyEnetity _moneyEnetityPrefab;
+    [SerializeField] private AirTunnelEntity _airTunnelEntityPrefab;
     [Header("Other settings")]
     [SerializeField] private int _number;
     [SerializeField] private int _startFramesMap;
@@ -41,10 +42,12 @@ public class LevelEntity : Entity
                 _levelController.ChangeLastFrameMap(frameMap);
                 InitializeSkydriver(frameMap);
                 InitializeMoney(frameMap);
+                InitializeAirTunnel(frameMap);
             });
 
             InitializeSkydriver(frameMap.View);
             InitializeMoney(frameMap.View);
+            InitializeAirTunnel(frameMap.View);
 
             if (i == _startFramesMap - 1)
                 _levelController.SetLastFrameMapEntity(frameMap.View.transform.localPosition);
@@ -96,5 +99,14 @@ public class LevelEntity : Entity
         var moneyEntity = Instantiate(_moneyEnetityPrefab);
         moneyEntity.Initialize(frameMap.transform);
         moneyEntity.View.transform.localPosition = new Vector3(x, y, 0);
+    }
+
+    private void InitializeAirTunnel(FrameMapView frameMap)
+    {
+        var x = Random.Range(-frameMap.Width / 4, frameMap.Width / 4);
+        var y = Random.Range(0, frameMap.Height / 2);
+        var airTunnelEntity = Instantiate(_airTunnelEntityPrefab);
+        airTunnelEntity.Initialize(frameMap.transform);
+        airTunnelEntity.View.transform.localPosition = new Vector3(x, y, 0);
     }
 }

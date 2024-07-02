@@ -46,8 +46,8 @@ public class GameManager : MonoBehaviour
 
         _counterManager.SetMaxSaveSkydrivers(level.CountMaxSkydrivers);
 
-        _healthManager.GameOverCommand.Subscribe(_ => { OnGameOver(); });
-        level.OnWinLevelCommand.Subscribe(_ => { OnWinLevel(); plane.Controller.OnWinLevel(); });
+        _healthManager.GameOverCommand.Subscribe(_ => { OnGameOver(); plane.Controller.SetPlaneStatic(); });
+        level.OnWinLevelCommand.Subscribe(_ => { OnWinLevel(); plane.Controller.SetPlaneStatic(); });
         plane.View.SaveSkydriverCommand.Subscribe(_ => { _counterManager.IncreaseCountSkydrivers(); });
         plane.View.GetMoneyCommand.Subscribe(_ => { _counterManager.IncreaseCountMoney(); });
         plane.View.GetDamageCommand.Subscribe(damage => { _healthManager.Damage(damage); });

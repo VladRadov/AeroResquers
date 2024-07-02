@@ -20,7 +20,7 @@ public class PlaneController
         _planeView.UpdateForce(_plane.ForceUp);
     }
 
-    public void OnWinLevel()
+    public void SetPlaneStatic()
     {
         _planeView.SetBodyType(RigidbodyType2D.Static);
     }

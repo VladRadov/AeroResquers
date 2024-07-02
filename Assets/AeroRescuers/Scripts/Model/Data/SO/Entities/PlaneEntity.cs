@@ -28,6 +28,8 @@ public class PlaneEntity : Entity
             _planeView.SetSkin(findedSkin.SpriteSkin);
 
         _planeController = new PlaneController(_plane, _planeView);
+
+        _planeView.OnCollisionAirTunnelCommand.Subscribe(_ => { _planeController.RecoveryHeight(); });
     }
 
     public override void FixedUpdate()
@@ -41,6 +43,7 @@ public class PlaneEntity : Entity
         ManagerUniRx.AddObjectDisposable(_planeView.GetMoneyCommand);
         ManagerUniRx.AddObjectDisposable(_planeView.GetDamageCommand);
         ManagerUniRx.AddObjectDisposable(_planeView.OnDisappearedWithMapCommand);
+        ManagerUniRx.AddObjectDisposable(_planeView.OnCollisionAirTunnelCommand);
     }
 
     public override void Dispose()
@@ -49,5 +52,6 @@ public class PlaneEntity : Entity
         ManagerUniRx.Dispose(_planeView.GetMoneyCommand);
         ManagerUniRx.Dispose(_planeView.GetDamageCommand);
         ManagerUniRx.Dispose(_planeView.OnDisappearedWithMapCommand);
+        ManagerUniRx.Dispose(_planeView.OnCollisionAirTunnelCommand);
     }
 }

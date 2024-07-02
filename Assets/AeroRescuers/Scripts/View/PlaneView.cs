@@ -14,6 +14,7 @@ public class PlaneView : MonoBehaviour
     public ReactiveCommand GetMoneyCommand = new();
     public ReactiveCommand<float> GetDamageCommand = new();
     public ReactiveCommand OnDisappearedWithMapCommand = new();
+    public ReactiveCommand OnCollisionAirTunnelCommand = new();
 
     public void SetSkin(Sprite skin)
         => _skin.sprite = skin;
@@ -49,6 +50,13 @@ public class PlaneView : MonoBehaviour
         var enemy = collision.gameObject.GetComponent<EnemyView>();
         if (enemy != null)
             GetDamageCommand.Execute(enemy.Damage);
+
+        var airTunnel = collision.gameObject.GetComponent<AirTunnelView>();
+        if (airTunnel != null)
+        {
+            airTunnel.SetActive(false);
+            OnCollisionAirTunnelCommand.Execute();
+        }
     }
 
     private void OnBecameInvisible()

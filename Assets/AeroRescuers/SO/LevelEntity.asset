@@ -18,6 +18,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8d44ac447f60e0a4eaa5c40952f41a0f, type: 2}
   - {fileID: 11400000, guid: e9efbb54cf04c1847bc0fbfc320dfe3b, type: 2}
   _moneyEnetityPrefab: {fileID: 11400000, guid: 5a9f32b59dc8c0643a4f2c1c0cf5a136, type: 2}
+  _airTunnelEntityPrefab: {fileID: 11400000, guid: 73f6843cd66cbac408cef490e4b726a2, type: 2}
   _number: 1
   _startFramesMap: 6
   _countMaxSkydrivers: 35
