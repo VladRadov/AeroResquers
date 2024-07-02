@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 8931028431260323860}
+  _skin: {fileID: 5956088748009711622}
 --- !u!61 &8729375265575248971
 BoxCollider2D:
   m_ObjectHideFlags: 0

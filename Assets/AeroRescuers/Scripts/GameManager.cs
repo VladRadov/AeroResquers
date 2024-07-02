@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private InputManager _inputManager;
     [SerializeField] private CounterManager _counterManager;
     [SerializeField] private PanelWinView _panelWinView;
+    [SerializeField] private PanelGameOverView _panelGameOverView;
     [SerializeField] private HealthManager _healthManager;
     [Header("Other settings")]
     [SerializeField] private Transform _mainCanvas;
@@ -45,16 +46,24 @@ public class GameManager : MonoBehaviour
 
         _counterManager.SetMaxSaveSkydrivers(level.CountMaxSkydrivers);
 
+        _healthManager.GameOverCommand.Subscribe(_ => { OnGameOver(); });
         level.OnWinLevelCommand.Subscribe(_ => { OnWinLevel(); plane.Controller.OnWinLevel(); });
         plane.View.SaveSkydriverCommand.Subscribe(_ => { _counterManager.IncreaseCountSkydrivers(); });
         plane.View.GetMoneyCommand.Subscribe(_ => { _counterManager.IncreaseCountMoney(); });
         plane.View.GetDamageCommand.Subscribe(damage => { _healthManager.Damage(damage); });
+        plane.View.OnDisappearedWithMapCommand.Subscribe(_ => { _healthManager.GameOverCommand.Execute(); });
         _inputManager.OnMoveCommand.Subscribe(_ => { plane.Controller.FlyingUp(); });
     }
 
     private void OnWinLevel()
     {
         _panelWinView.SetActive(true);
+        _isPause = true;
+    }
+
+    private void OnGameOver()
+    {
+        _panelGameOverView.SetActive(true);
         _isPause = true;
     }
 

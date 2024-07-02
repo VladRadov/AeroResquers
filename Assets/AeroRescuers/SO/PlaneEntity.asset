@@ -19,3 +19,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: aef34851385ef6e47a7a0b7a9b3b73c6, type: 2}
   - {fileID: 11400000, guid: 5bd363a43eee9184fb8bfe825dd5b944, type: 2}
   _forceUp: 1
+  _speedIncreaseGravity: 0.01

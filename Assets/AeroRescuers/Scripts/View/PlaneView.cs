@@ -8,9 +8,12 @@ public class PlaneView : MonoBehaviour
     [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private SpriteRenderer _skin;
 
+    public float CurrentGravity => _rigidbody.gravityScale;
+
     public ReactiveCommand SaveSkydriverCommand = new();
     public ReactiveCommand GetMoneyCommand = new();
     public ReactiveCommand<float> GetDamageCommand = new();
+    public ReactiveCommand OnDisappearedWithMapCommand = new();
 
     public void SetSkin(Sprite skin)
         => _skin.sprite = skin;
@@ -20,6 +23,9 @@ public class PlaneView : MonoBehaviour
 
     public void SetBodyType(RigidbodyType2D bodyType)
         => _rigidbody.bodyType = bodyType;
+
+    public void SetGravity(float value)
+        => _rigidbody.gravityScale = value;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -43,6 +49,11 @@ public class PlaneView : MonoBehaviour
         var enemy = collision.gameObject.GetComponent<EnemyView>();
         if (enemy != null)
             GetDamageCommand.Execute(enemy.Damage);
+    }
+
+    private void OnBecameInvisible()
+    {
+        OnDisappearedWithMapCommand.Execute();
     }
 
     private void OnValidate()

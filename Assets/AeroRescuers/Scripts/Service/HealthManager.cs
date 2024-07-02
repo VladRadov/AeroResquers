@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UniRx;
 
 public class HealthManager : MonoBehaviour
 {
@@ -9,14 +10,20 @@ public class HealthManager : MonoBehaviour
 
     [SerializeField] private Slider _indicatorHealth;
 
+    public ReactiveCommand GameOverCommand = new();
+
     public void Damage(float countDamage)
     {
         _currentHealth -= countDamage;
         ViewCurrentHealth();
+
+        if (_currentHealth <= 0)
+            GameOverCommand.Execute();
     }
 
     private void Start()
     {
+        ManagerUniRx.AddObjectDisposable(GameOverCommand);
         _currentHealth = 100;
         _indicatorHealth.maxValue = 100;
         ViewCurrentHealth();
@@ -24,4 +31,9 @@ public class HealthManager : MonoBehaviour
 
     private void ViewCurrentHealth()
         => _indicatorHealth.value = _currentHealth;
+
+    private void OnDestroy()
+    {
+        ManagerUniRx.Dispose(GameOverCommand);
+    }
 }

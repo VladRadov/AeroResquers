@@ -13,6 +13,7 @@ public class PlaneEntity : Entity
     [SerializeField] private PlaneView _planeViewPrefab;
     [SerializeField] private List<SkinPlane> _skinsPlane;
     [SerializeField] private float _forceUp;
+    [SerializeField] private float _speedIncreaseGravity;
 
     public PlaneView View => _planeView;
     public PlaneController Controller => _planeController;
@@ -31,7 +32,7 @@ public class PlaneEntity : Entity
 
     public override void FixedUpdate()
     {
-
+        _planeController.LossHeight(_speedIncreaseGravity);
     }
 
     public override void AddObjectDisposable()
@@ -39,6 +40,7 @@ public class PlaneEntity : Entity
         ManagerUniRx.AddObjectDisposable(_planeView.SaveSkydriverCommand);
         ManagerUniRx.AddObjectDisposable(_planeView.GetMoneyCommand);
         ManagerUniRx.AddObjectDisposable(_planeView.GetDamageCommand);
+        ManagerUniRx.AddObjectDisposable(_planeView.OnDisappearedWithMapCommand);
     }
 
     public override void Dispose()
@@ -46,5 +48,6 @@ public class PlaneEntity : Entity
         ManagerUniRx.Dispose(_planeView.SaveSkydriverCommand);
         ManagerUniRx.Dispose(_planeView.GetMoneyCommand);
         ManagerUniRx.Dispose(_planeView.GetDamageCommand);
+        ManagerUniRx.Dispose(_planeView.OnDisappearedWithMapCommand);
     }
 }
