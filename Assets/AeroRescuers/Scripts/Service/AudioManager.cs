@@ -45,6 +45,9 @@ public class AudioManager : MonoBehaviour
 
     public void PlayPurchaseError() => PlaySound("PurchaseError", _audioSourceSound2);
 
+    public void StopSoundPlaneFall()
+        => _audioSourceSound2.Stop();
+
     public void SaveVolume()
     {
         _audioSourceMusic.volume = ContainerSaveerPlayerPrefs.Instance.SaveerData.VolumeMusic;

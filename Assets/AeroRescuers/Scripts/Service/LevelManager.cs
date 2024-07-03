@@ -12,7 +12,7 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
-        var findedLevel =_levels.Find(level => level.LevelNumber == ContainerSaveerPlayerPrefs.Instance.SaveerData.CurrentLevel);
+        var findedLevel =_levels.Find(level => level.LevelNumber == (ContainerSaveerPlayerPrefs.Instance.SaveerData.TypeGame == 1 ? ContainerSaveerPlayerPrefs.Instance.SaveerData.CurrentLevel : 0));
         _currentLevel = findedLevel;
     }
 }

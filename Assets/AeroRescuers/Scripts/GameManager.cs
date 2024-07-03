@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private HealthManager _healthManager;
     [SerializeField] private LevelManager _levelManager;
     [SerializeField] private PanelPauseView _panelPauseView;
+    [SerializeField] private EducationView _educationView;
     [Header("UI")]
     [SerializeField] private Button _pause;
     [SerializeField] private Button _startGame;
@@ -30,6 +31,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        CheckProgressEducation();
         _entities.Add(_levelManager.CurrentLevel);
 
         foreach (var entity in _entities)
@@ -85,6 +87,12 @@ public class GameManager : MonoBehaviour
         plane.Controller.SetPlaneStatic();
     }
 
+    private void CheckProgressEducation()
+    {
+        if (ContainerSaveerPlayerPrefs.Instance.SaveerData.IsEducation == 0)
+            _educationView.SetActive(true);
+    }
+
     private void OnPauseGame()
     {
         _panelPauseView.SetActive(true);
@@ -106,6 +114,7 @@ public class GameManager : MonoBehaviour
 
     private void OnGameOver()
     {
+        AudioManager.Instance.StopSoundPlaneFall();
         AudioManager.Instance.PlayGameOver();
         _panelGameOverView.SetActive(true);
         _isPause = true;

@@ -50,7 +50,7 @@ public class LevelEntity : Entity
                 InitializeMoney(frameMap);
                 InitializeAirTunnel(frameMap);
                 InitializeCloud(frameMap);
-                InitializeWave(frameMap);
+                InitializeEnemy(frameMap);
             });
 
             if (i != 0)
@@ -59,7 +59,7 @@ public class LevelEntity : Entity
                 InitializeMoney(frameMapView);
                 InitializeAirTunnel(frameMapView);
                 InitializeCloud(frameMapView);
-                InitializeWave(frameMapView);
+                InitializeEnemy(frameMapView);
             }
 
             if (i == _startFramesMap - 1)
@@ -88,7 +88,7 @@ public class LevelEntity : Entity
     }
 
     private bool TryWinLevel()
-        => _countMaxSkydrivers == ContainerSaveerPlayerPrefs.Instance.SaveerData.CountSkydriver;
+        => _countMaxSkydrivers != 0 && _countMaxSkydrivers == ContainerSaveerPlayerPrefs.Instance.SaveerData.CountSkydriver;
 
     private void InitializeSkydriver(FrameMapView frameMap)
     {
@@ -139,12 +139,12 @@ public class LevelEntity : Entity
         }
     }
 
-    private void InitializeWave(FrameMapView frameMap)
+    private void InitializeEnemy(FrameMapView frameMap)
     {
         for (int i = 0; i < _enemyPrefabs.Count; i++)
         {
             var x = Random.Range(-frameMap.Width / 4, frameMap.Width / 4);
-            float y = frameMap.Height / 2;
+            float y = (frameMap.Height / 2) - 10;
 
             if (_enemyPrefabs[i] is WaveEntity)
                 y = Random.Range(0, - frameMap.Height / 2);

@@ -16,14 +16,21 @@ public class PlayPanelView : MonoBehaviour
     private void Start()
     {
         _back.onClick.AddListener(() => { SetActive(false); });
-        _infinityGame.onClick.AddListener(() => { OnEntryStoryGame(TypeGame.Infinity); });
-        _storyGame.onClick.AddListener(() => { OnEntryStoryGame(TypeGame.Story); });
+        _infinityGame.onClick.AddListener(() =>
+        {
+            OnEntryStoryGame(TypeGame.Infinity);
+            ManagerScenes.Instance.LoadAsyncFromCoroutine("Game");
+        });
+        _storyGame.onClick.AddListener(() =>
+        {
+            OnEntryStoryGame(TypeGame.Story);
+            _listLevelsView.SetActive(true);
+        });
     }
 
     private void OnEntryStoryGame(TypeGame typeGame)
     {
         AudioManager.Instance.PlayClickButton();
         ContainerSaveerPlayerPrefs.Instance.SaveerData.TypeGame = (int)typeGame;
-        _listLevelsView.SetActive(true);
     }
 }

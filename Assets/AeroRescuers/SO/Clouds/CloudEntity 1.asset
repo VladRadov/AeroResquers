@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: CloudEntity 1
   m_EditorClassIdentifier: 
   _cloudViewPrefab: {fileID: 5641839186070411961, guid: f7e18d40dd940cf4b952da6e546069d7, type: 3}
-  _damage: 10
+  _damage: 2

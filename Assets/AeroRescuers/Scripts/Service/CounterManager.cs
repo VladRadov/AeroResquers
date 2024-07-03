@@ -18,7 +18,10 @@ public class CounterManager : MonoBehaviour
     {
         var countSavedSkydrivers = int.Parse(_viewCountSavedSkydrivers.text) + 1;
         _viewCountSavedSkydrivers.text = countSavedSkydrivers.ToString();
-        _countSavedSkydrivers.value = countSavedSkydrivers;
+
+        if(_countSavedSkydrivers.maxValue != 0)
+            _countSavedSkydrivers.value = countSavedSkydrivers;
+
         ContainerSaveerPlayerPrefs.Instance.SaveerData.CountSkydriver = countSavedSkydrivers;
     }
 
