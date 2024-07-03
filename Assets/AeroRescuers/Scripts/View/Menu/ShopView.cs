@@ -16,7 +16,11 @@ public class ShopView : MonoBehaviour
 
     private void Start()
     {
-        _back.onClick.AddListener(() => { SetActive(false); });
+        _back.onClick.AddListener(() =>
+        {
+            AudioManager.Instance.PlayClickButton();
+            SetActive(false);
+        });
         UpdateViewMoney();
 
         foreach (var item in _itemsShop)

@@ -20,6 +20,7 @@ public class LevelItemView : MonoBehaviour
 
     private void OnPlay()
     {
+        AudioManager.Instance.PlayClickButton();
         ContainerSaveerPlayerPrefs.Instance.SaveerData.CurrentLevel = _numberLevel;
         ManagerScenes.Instance.LoadAsyncFromCoroutine("Game");
     }

@@ -17,9 +17,14 @@ public class ListLevelsView : MonoBehaviour
 
     private void Start()
     {
+        ContainerSaveerPlayerPrefs.Instance.SaveerData.MaxLevel = _levels.Count;
         var maxOpenedLevel = ContainerSaveerPlayerPrefs.Instance.SaveerData.MaxOpenedLevel;
         CreateItemLevels(_isOpenAllLevels ? _levels.Count : maxOpenedLevel);
-        _back.onClick.AddListener(() => { SetActive(false); });
+        _back.onClick.AddListener(() =>
+        {
+            AudioManager.Instance.PlayClickButton();
+            SetActive(false);
+        });
     }
 
     private void CreateItemLevels(int maxLevel)

@@ -34,6 +34,7 @@ public class SwitchVibrationView : MonoBehaviour
 
     private void ChangeValue(int value)
     {
+        AudioManager.Instance.PlayClickButton();
         ContainerSaveerPlayerPrefs.Instance.SaveerData.IsVibrationOn = value;
         UpdateUI();
     }

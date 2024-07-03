@@ -33,6 +33,14 @@ public class PlaneController
 
     public void LossHeight(float speedIncreaseGravity)
     {
+        if (_currentGravity < 7 && _plane.IsFall)
+            _plane.IsFall = false;
+        else if (_currentGravity >= 7 && _plane.IsFall == false)
+        {
+            _plane.IsFall = true;
+            AudioManager.Instance.PlayAirplaneFall();
+        }
+
         _currentGravity += speedIncreaseGravity;
         _planeView.SetGravity(_currentGravity);
     }

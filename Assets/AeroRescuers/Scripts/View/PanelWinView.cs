@@ -25,15 +25,24 @@ public class PanelWinView : MonoBehaviour
     {
         _money.text = ContainerSaveerPlayerPrefs.Instance.SaveerData.GameMoney.ToString();
         _countSkydriver.text = ContainerSaveerPlayerPrefs.Instance.SaveerData.CountSkydriver.ToString();
+
+        if (ContainerSaveerPlayerPrefs.Instance.SaveerData.CurrentLevel == ContainerSaveerPlayerPrefs.Instance.SaveerData.MaxLevel)
+            _nextLevel.enabled = false;
     }
 
     private void OnNextLevel()
     {
-        
+        AudioManager.Instance.PlayClickButton();
+        if(ContainerSaveerPlayerPrefs.Instance.SaveerData.CurrentLevel >= ContainerSaveerPlayerPrefs.Instance.SaveerData.MaxOpenedLevel)
+            ContainerSaveerPlayerPrefs.Instance.SaveerData.MaxOpenedLevel = ContainerSaveerPlayerPrefs.Instance.SaveerData.MaxOpenedLevel + 1;
+
+        ContainerSaveerPlayerPrefs.Instance.SaveerData.CurrentLevel = ContainerSaveerPlayerPrefs.Instance.SaveerData.CurrentLevel + 1;
+        ManagerScenes.Instance.LoadAsyncFromCoroutine("Game");
     }
 
     private void OnQuit()
     {
+        AudioManager.Instance.PlayClickButton();
         ManagerScenes.Instance.LoadAsyncFromCoroutine("Menu");
     }
 }

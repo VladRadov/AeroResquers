@@ -53,11 +53,14 @@ public class LevelEntity : Entity
                 InitializeWave(frameMap);
             });
 
-            InitializeSkydriver(frameMapView);
-            InitializeMoney(frameMapView);
-            InitializeAirTunnel(frameMapView);
-            InitializeCloud(frameMapView);
-            InitializeWave(frameMapView);
+            if (i != 0)
+            {
+                InitializeSkydriver(frameMapView);
+                InitializeMoney(frameMapView);
+                InitializeAirTunnel(frameMapView);
+                InitializeCloud(frameMapView);
+                InitializeWave(frameMapView);
+            }
 
             if (i == _startFramesMap - 1)
                 _levelController.SetLastFrameMapEntity(frameMap.View.transform.localPosition);

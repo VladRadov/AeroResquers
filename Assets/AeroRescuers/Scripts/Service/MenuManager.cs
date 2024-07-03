@@ -16,8 +16,20 @@ public class MenuManager : MonoBehaviour
 
     private void Start()
     {
-        _gamePlay.onClick.AddListener(() => { _playPanelView.SetActive(true); });
-        _shop.onClick.AddListener(() => { _shopView.SetActive(true); });
-        _settings.onClick.AddListener(() => { _settingsPanelView.SetActive(true); });
+        _gamePlay.onClick.AddListener(() =>
+        {
+            _playPanelView.SetActive(true);
+            AudioManager.Instance.PlayClickButton();
+        });
+        _shop.onClick.AddListener(() =>
+        {
+            _shopView.SetActive(true);
+            AudioManager.Instance.PlayClickButton();
+        });
+        _settings.onClick.AddListener(() =>
+        {
+            _settingsPanelView.SetActive(true);
+            AudioManager.Instance.PlayClickButton();
+        });
     }
 }

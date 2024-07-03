@@ -22,6 +22,7 @@ public class PlayPanelView : MonoBehaviour
 
     private void OnEntryStoryGame(TypeGame typeGame)
     {
+        AudioManager.Instance.PlayClickButton();
         ContainerSaveerPlayerPrefs.Instance.SaveerData.TypeGame = (int)typeGame;
         _listLevelsView.SetActive(true);
     }

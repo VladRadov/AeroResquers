@@ -21,9 +21,17 @@ public class PanelPauseView : MonoBehaviour
     {
         UpdateTitleStateVolume();
         ManagerUniRx.AddObjectDisposable(OnContinueGameCommand);
-        _continue.onClick.AddListener(() => { OnContinueGameCommand.Execute(); });
+        _continue.onClick.AddListener(() =>
+        {
+            AudioManager.Instance.PlayClickButton();
+            OnContinueGameCommand.Execute();
+        });
         _changeStateSound.onClick.AddListener(OnChangeStateSound);
-        _quit.onClick.AddListener(() => { ManagerScenes.Instance.LoadAsyncFromCoroutine("Menu"); });
+        _quit.onClick.AddListener(() =>
+        {
+            AudioManager.Instance.PlayClickButton();
+            ManagerScenes.Instance.LoadAsyncFromCoroutine("Menu");
+        });
     }
 
     private void OnChangeStateSound()
@@ -40,6 +48,8 @@ public class PanelPauseView : MonoBehaviour
         }
 
         UpdateTitleStateVolume();
+        AudioManager.Instance.SaveVolume();
+        AudioManager.Instance.PlayClickButton();
     }
 
     private void UpdateTitleStateVolume()

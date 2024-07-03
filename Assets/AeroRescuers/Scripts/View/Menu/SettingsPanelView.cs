@@ -12,6 +12,10 @@ public class SettingsPanelView : MonoBehaviour
 
     private void Start()
     {
-        _back.onClick.AddListener(() => { SetActive(false); });
+        _back.onClick.AddListener(() =>
+        {
+            AudioManager.Instance.PlayClickButton();
+            SetActive(false);
+        });
     }
 }

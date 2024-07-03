@@ -19,13 +19,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PanelPauseView _panelPauseView;
     [Header("UI")]
     [SerializeField] private Button _pause;
+    [SerializeField] private Button _startGame;
     [Header("Other settings")]
     [SerializeField] private Transform _mainCanvas;
 
+    private void Awake()
+    {
+        AudioManager.Instance.PlayMusicGame();
+    }
+
     private void Start()
     {
-        _isPause = false;
-
         _entities.Add(_levelManager.CurrentLevel);
 
         foreach (var entity in _entities)
@@ -63,8 +67,22 @@ public class GameManager : MonoBehaviour
         viewPlane.OnDisappearedWithMapCommand.Subscribe(_ => { _healthManager.Die(); });
         _inputManager.OnMoveCommand.Subscribe(_ => { plane.Controller.FlyingUp(); });
 
-        _pause.onClick.AddListener(() => { OnPauseGame(); plane.Controller.SetPlaneStatic(); });
+        _pause.onClick.AddListener(() =>
+        {
+            AudioManager.Instance.PlayClickButton();
+            OnPauseGame();
+            plane.Controller.SetPlaneStatic();
+        });
+        _startGame.onClick.AddListener(() =>
+        {
+            _startGame.gameObject.SetActive(false);
+            _isPause = false;
+            plane.Controller.SetPlaneDynamic();
+        });
         _panelPauseView.OnContinueGameCommand.Subscribe(_ => { OnContinueGame(); plane.Controller.SetPlaneDynamic(); });
+
+        _isPause = true;
+        plane.Controller.SetPlaneStatic();
     }
 
     private void OnPauseGame()
@@ -81,12 +99,14 @@ public class GameManager : MonoBehaviour
 
     private void OnWinLevel()
     {
+        AudioManager.Instance.PlayVictory();
         _panelWinView.SetActive(true);
         _isPause = true;
     }
 
     private void OnGameOver()
     {
+        AudioManager.Instance.PlayGameOver();
         _panelGameOverView.SetActive(true);
         _isPause = true;
     }

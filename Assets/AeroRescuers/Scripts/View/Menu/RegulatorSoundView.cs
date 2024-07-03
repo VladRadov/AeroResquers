@@ -8,6 +8,11 @@ public class RegulatorSoundView : MonoBehaviour
     private void Start()
     {
         _regulatorSound.value = ContainerSaveerPlayerPrefs.Instance.SaveerData.VolumeSound;
-        _regulatorSound.onValueChanged.AddListener((value) => { ContainerSaveerPlayerPrefs.Instance.SaveerData.VolumeSound = value; });
+        _regulatorSound.onValueChanged.AddListener((value) =>
+        {
+            AudioManager.Instance.PlayClickButton();
+            ContainerSaveerPlayerPrefs.Instance.SaveerData.VolumeSound = value;
+            AudioManager.Instance.SaveVolume();
+        });
     }
 }

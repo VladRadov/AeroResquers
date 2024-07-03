@@ -43,15 +43,19 @@ public class ItemShopView : MonoBehaviour
 
     private void OnPurchase()
     {
+        AudioManager.Instance.PlayClickButton();
         if (WalletManager.TryPurchase(_price))
         {
             ContainerSaveerPlayerPrefs.Instance.SaveerData.OpenSkins += _skinPlane.Name + ",";
             OnChangeStateItemCommand.Execute();
         }
+        else
+            AudioManager.Instance.PlayPurchaseError();
     }
 
     private void OnSelect()
     {
+        AudioManager.Instance.PlayClickButton();
         ContainerSaveerPlayerPrefs.Instance.SaveerData.CurrentSkin = _skinPlane.Name;
         OnChangeStateItemCommand.Execute();
     }
@@ -65,6 +69,6 @@ public class ItemShopView : MonoBehaviour
 
     private void OnDestroy()
     {
-        //ManagerUniRx.Dispose(OnChangeStateItemCommand);
+        ManagerUniRx.Dispose(OnChangeStateItemCommand);
     }
 }

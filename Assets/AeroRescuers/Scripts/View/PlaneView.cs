@@ -33,6 +33,7 @@ public class PlaneView : ViewEntity
         var skydriver = collision.gameObject.GetComponent<SkydiverView>();
         if (skydriver != null)
         {
+            AudioManager.Instance.PlayCaughtSkydriver();
             skydriver.SetActive(false);
             SaveSkydriverCommand.Execute();
         }
@@ -43,17 +44,28 @@ public class PlaneView : ViewEntity
         var money = collision.gameObject.GetComponent<MoneyView>();
         if (money != null)
         {
+            AudioManager.Instance.PlayCoin();
             money.SetActive(false);
             GetMoneyCommand.Execute();
         }
 
         var enemy = collision.gameObject.GetComponent<EnemyView>();
         if (enemy != null)
+        {
+            if (enemy is SmokeEnemyView)
+                AudioManager.Instance.PlayAttackFire();
+            else if (enemy is StoneView)
+                AudioManager.Instance.PlayAttackStone();
+            else if (enemy is WaveView)
+                AudioManager.Instance.PlayAttackWave();
+
             GetDamageCommand.Execute(enemy.Damage);
+        }
 
         var airTunnel = collision.gameObject.GetComponent<AirTunnelView>();
         if (airTunnel != null)
         {
+            AudioManager.Instance.PlayAirplaneTunnel();
             airTunnel.SetActive(false);
             OnCollisionAirTunnelCommand.Execute();
         }
@@ -61,6 +73,7 @@ public class PlaneView : ViewEntity
         var cloud = collision.gameObject.GetComponent<CloudView>();
         if (cloud != null && cloud.IsSetDamage == false)
         {
+            AudioManager.Instance.PlayAttackCloud();
             cloud.SetActive(false);
             cloud.SetDamaged();
             GetDamageCommand.Execute(cloud.Damage);
