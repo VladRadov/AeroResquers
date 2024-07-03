@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
         PlaneView viewPlane = (PlaneView)plane.View;
         viewPlane.SaveSkydriverCommand.Subscribe(_ => { _counterManager.IncreaseCountSkydrivers(); });
         viewPlane.GetMoneyCommand.Subscribe(_ => { _counterManager.IncreaseCountMoney(); });
-        viewPlane.GetDamageCommand.Subscribe(damage => { _healthManager.Damage(damage); });
+        viewPlane.GetDamageCommand.Subscribe(damage => { _healthManager.Damage(damage); Vibration(); });
         viewPlane.OnDisappearedWithMapCommand.Subscribe(_ => { _healthManager.Die(); });
         _inputManager.OnMoveCommand.Subscribe(_ => { plane.Controller.FlyingUp(); });
 
@@ -85,6 +85,12 @@ public class GameManager : MonoBehaviour
 
         _isPause = true;
         plane.Controller.SetPlaneStatic();
+    }
+
+    private void Vibration()
+    {
+        if(ContainerSaveerPlayerPrefs.Instance.SaveerData.IsVibrationOn == 1)
+            Handheld.Vibrate();
     }
 
     private void CheckProgressEducation()

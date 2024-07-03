@@ -44,7 +44,18 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Mouse"",
+                    ""groups"": ""Mouse and touch"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""39d82c23-a126-4e03-8dce-44b24f81b987"",
+                    ""path"": ""<Touchscreen>/Press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and touch"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -54,11 +65,16 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
     ],
     ""controlSchemes"": [
         {
-            ""name"": ""Mouse"",
-            ""bindingGroup"": ""Mouse"",
+            ""name"": ""Mouse and touch"",
+            ""bindingGroup"": ""Mouse and touch"",
             ""devices"": [
                 {
                     ""devicePath"": ""<Mouse>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Touchscreen>"",
                     ""isOptional"": false,
                     ""isOR"": false
                 }
@@ -172,13 +188,13 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         }
     }
     public MapActions @Map => new MapActions(this);
-    private int m_MouseSchemeIndex = -1;
-    public InputControlScheme MouseScheme
+    private int m_MouseandtouchSchemeIndex = -1;
+    public InputControlScheme MouseandtouchScheme
     {
         get
         {
-            if (m_MouseSchemeIndex == -1) m_MouseSchemeIndex = asset.FindControlSchemeIndex("Mouse");
-            return asset.controlSchemes[m_MouseSchemeIndex];
+            if (m_MouseandtouchSchemeIndex == -1) m_MouseandtouchSchemeIndex = asset.FindControlSchemeIndex("Mouse and touch");
+            return asset.controlSchemes[m_MouseandtouchSchemeIndex];
         }
     }
     public interface IMapActions

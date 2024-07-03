@@ -1106,7 +1106,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2ee77185746d0e440b52d1c32208f650, type: 2}
   - {fileID: 11400000, guid: d01a1a89d15414b44b84918e59f8dbb7, type: 2}
   _back: {fileID: 1398155766}
-  _isOpenAllLevels: 1
+  _isOpenAllLevels: 0
 --- !u!1 &180631332
 GameObject:
   m_ObjectHideFlags: 0

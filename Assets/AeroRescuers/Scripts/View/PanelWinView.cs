@@ -27,16 +27,20 @@ public class PanelWinView : MonoBehaviour
         _countSkydriver.text = ContainerSaveerPlayerPrefs.Instance.SaveerData.CountSkydriver.ToString();
 
         if (ContainerSaveerPlayerPrefs.Instance.SaveerData.CurrentLevel == ContainerSaveerPlayerPrefs.Instance.SaveerData.MaxLevel)
+        {
             _nextLevel.enabled = false;
+            return;
+        }
+
+        if (ContainerSaveerPlayerPrefs.Instance.SaveerData.CurrentLevel == ContainerSaveerPlayerPrefs.Instance.SaveerData.MaxOpenedLevel)
+            ContainerSaveerPlayerPrefs.Instance.SaveerData.MaxOpenedLevel = ContainerSaveerPlayerPrefs.Instance.SaveerData.MaxOpenedLevel + 1;
+
+        ContainerSaveerPlayerPrefs.Instance.SaveerData.CurrentLevel = ContainerSaveerPlayerPrefs.Instance.SaveerData.CurrentLevel + 1;
     }
 
     private void OnNextLevel()
     {
         AudioManager.Instance.PlayClickButton();
-        if(ContainerSaveerPlayerPrefs.Instance.SaveerData.CurrentLevel >= ContainerSaveerPlayerPrefs.Instance.SaveerData.MaxOpenedLevel)
-            ContainerSaveerPlayerPrefs.Instance.SaveerData.MaxOpenedLevel = ContainerSaveerPlayerPrefs.Instance.SaveerData.MaxOpenedLevel + 1;
-
-        ContainerSaveerPlayerPrefs.Instance.SaveerData.CurrentLevel = ContainerSaveerPlayerPrefs.Instance.SaveerData.CurrentLevel + 1;
         ManagerScenes.Instance.LoadAsyncFromCoroutine("Game");
     }
 
