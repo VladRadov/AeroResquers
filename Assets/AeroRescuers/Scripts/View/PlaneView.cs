@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 
-public class PlaneView : MonoBehaviour
+public class PlaneView : ViewEntity
 {
     [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private SpriteRenderer _skin;
@@ -57,11 +57,20 @@ public class PlaneView : MonoBehaviour
             airTunnel.SetActive(false);
             OnCollisionAirTunnelCommand.Execute();
         }
+
+        var cloud = collision.gameObject.GetComponent<CloudView>();
+        if (cloud != null && cloud.IsSetDamage == false)
+        {
+            cloud.SetActive(false);
+            cloud.SetDamaged();
+            GetDamageCommand.Execute(cloud.Damage);
+        }
     }
 
     private void OnBecameInvisible()
     {
-        OnDisappearedWithMapCommand.Execute();
+        if(OnDisappearedWithMapCommand.IsDisposed == false)
+            OnDisappearedWithMapCommand.Execute();
     }
 
     private void OnValidate()

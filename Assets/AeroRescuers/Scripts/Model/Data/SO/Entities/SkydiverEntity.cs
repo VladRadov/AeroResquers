@@ -10,7 +10,7 @@ public class SkydiverEntity : Entity
 
     [SerializeField] private SkydiverView _skydiverViewPrefab;
 
-    public SkydiverView View => _skydiverView;
+    public override ViewEntity View => _skydiverView;
     public SkydiverController Controller => _skydiverController;
 
     public override void Initialize(Transform parent)

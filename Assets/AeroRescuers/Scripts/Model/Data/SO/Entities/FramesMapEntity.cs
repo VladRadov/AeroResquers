@@ -13,7 +13,7 @@ public class FramesMapEntity : Entity
     [Header("Шаг движения карты")]
     [SerializeField] private float _stepMove;
 
-    public FramesMapView View => _framesMapView;
+    public override ViewEntity View => _framesMapView;
 
     public override void Initialize(Transform parent)
     {

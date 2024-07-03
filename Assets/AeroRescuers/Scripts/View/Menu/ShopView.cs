@@ -17,12 +17,19 @@ public class ShopView : MonoBehaviour
     private void Start()
     {
         _back.onClick.AddListener(() => { SetActive(false); });
-        _countMoney.text = ContainerSaveerPlayerPrefs.Instance.SaveerData.Money.ToString();
+        UpdateViewMoney();
 
         foreach (var item in _itemsShop)
         {
             foreach (var itemTemp in _itemsShop)
-                item.OnChangeStateItemCommand.Subscribe(_ => { itemTemp.UpdateItemUI(); });
+                item.OnChangeStateItemCommand.Subscribe(_ =>
+                {
+                    itemTemp.UpdateItemUI();
+                    UpdateViewMoney();
+                });
         }
     }
+
+    private void UpdateViewMoney()
+        => _countMoney.text = ContainerSaveerPlayerPrefs.Instance.SaveerData.Money.ToString();
 }

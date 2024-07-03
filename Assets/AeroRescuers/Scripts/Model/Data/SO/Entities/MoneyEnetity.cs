@@ -10,7 +10,7 @@ public class MoneyEnetity : Entity
     [Header("Components")]
     [SerializeField] private MoneyView _moneyViewPrefab;
 
-    public MoneyView View => _moneyView;
+    public override ViewEntity View => _moneyView;
 
     public override void Initialize(Transform parent)
     {

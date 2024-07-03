@@ -20,7 +20,7 @@ public class SwitchVibrationView : MonoBehaviour
 
     private void UpdateUI()
     {
-        if (ContainerSaveerPlayerPrefs.Instance.SaveerData.IsVibrationOn == 1)
+        if (ContainerSaveerPlayerPrefs.Instance.SaveerData.IsVibrationOn == 0)
         {
             _imageOn.color = new Color(1, 1, 1, 0.5f);
             _imageOff.color = new Color(1, 1, 1, 1);

@@ -12,7 +12,7 @@ public class FrameMapEntity : Entity
     [SerializeField] private float _distanceOffset;
 
     public FrameMapController Controller => _frameMapController;
-    public FrameMapView View => _frameMapView;
+    public override ViewEntity View => _frameMapView;
 
     public override void Initialize(Transform parent)
     {

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UniRx;
 
 public class GameManager : MonoBehaviour
@@ -14,12 +15,18 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PanelWinView _panelWinView;
     [SerializeField] private PanelGameOverView _panelGameOverView;
     [SerializeField] private HealthManager _healthManager;
+    [SerializeField] private LevelManager _levelManager;
+    [SerializeField] private PanelPauseView _panelPauseView;
+    [Header("UI")]
+    [SerializeField] private Button _pause;
     [Header("Other settings")]
     [SerializeField] private Transform _mainCanvas;
 
     private void Start()
     {
         _isPause = false;
+
+        _entities.Add(_levelManager.CurrentLevel);
 
         foreach (var entity in _entities)
         {
@@ -31,12 +38,13 @@ public class GameManager : MonoBehaviour
         }
 
         FramesMapEntity framesMap = GetEntity<FramesMapEntity>();
+        FramesMapView viewFramesMap = (FramesMapView)framesMap.View;
 
         foreach (var entity in _entities)
         {
             if (entity is PlaneEntity == false && entity is FramesMapEntity == false)
             {
-                entity.Initialize(framesMap.View.Transform);
+                entity.Initialize(viewFramesMap.Transform);
                 entity.AddObjectDisposable();
             }
         }
@@ -48,11 +56,27 @@ public class GameManager : MonoBehaviour
 
         _healthManager.GameOverCommand.Subscribe(_ => { OnGameOver(); plane.Controller.SetPlaneStatic(); });
         level.OnWinLevelCommand.Subscribe(_ => { OnWinLevel(); plane.Controller.SetPlaneStatic(); });
-        plane.View.SaveSkydriverCommand.Subscribe(_ => { _counterManager.IncreaseCountSkydrivers(); });
-        plane.View.GetMoneyCommand.Subscribe(_ => { _counterManager.IncreaseCountMoney(); });
-        plane.View.GetDamageCommand.Subscribe(damage => { _healthManager.Damage(damage); });
-        plane.View.OnDisappearedWithMapCommand.Subscribe(_ => { _healthManager.GameOverCommand.Execute(); });
+        PlaneView viewPlane = (PlaneView)plane.View;
+        viewPlane.SaveSkydriverCommand.Subscribe(_ => { _counterManager.IncreaseCountSkydrivers(); });
+        viewPlane.GetMoneyCommand.Subscribe(_ => { _counterManager.IncreaseCountMoney(); });
+        viewPlane.GetDamageCommand.Subscribe(damage => { _healthManager.Damage(damage); });
+        viewPlane.OnDisappearedWithMapCommand.Subscribe(_ => { _healthManager.Die(); });
         _inputManager.OnMoveCommand.Subscribe(_ => { plane.Controller.FlyingUp(); });
+
+        _pause.onClick.AddListener(() => { OnPauseGame(); plane.Controller.SetPlaneStatic(); });
+        _panelPauseView.OnContinueGameCommand.Subscribe(_ => { OnContinueGame(); plane.Controller.SetPlaneDynamic(); });
+    }
+
+    private void OnPauseGame()
+    {
+        _panelPauseView.SetActive(true);
+        _isPause = true;
+    }
+
+    private void OnContinueGame()
+    {
+        _panelPauseView.SetActive(false);
+        _isPause = false;
     }
 
     private void OnWinLevel()

@@ -7,7 +7,8 @@ public class PlayPanelView : MonoBehaviour
 {
     [SerializeField] private Button _back;
     [SerializeField] private Button _infinityGame;
-    [SerializeField] private Button _storeGame;
+    [SerializeField] private Button _storyGame;
+    [SerializeField] private ListLevelsView _listLevelsView;
 
     public void SetActive(bool value)
         => gameObject.SetActive(value);
@@ -15,13 +16,13 @@ public class PlayPanelView : MonoBehaviour
     private void Start()
     {
         _back.onClick.AddListener(() => { SetActive(false); });
-        _infinityGame.onClick.AddListener(() => { OnEntryGame(TypeGame.Infinity); });
-        _storeGame.onClick.AddListener(() => { OnEntryGame(TypeGame.Story); });
+        _infinityGame.onClick.AddListener(() => { OnEntryStoryGame(TypeGame.Infinity); });
+        _storyGame.onClick.AddListener(() => { OnEntryStoryGame(TypeGame.Story); });
     }
 
-    private void OnEntryGame(TypeGame typeGame)
+    private void OnEntryStoryGame(TypeGame typeGame)
     {
         ContainerSaveerPlayerPrefs.Instance.SaveerData.TypeGame = (int)typeGame;
-        ManagerScenes.Instance.LoadAsyncFromCoroutine("Game");
+        _listLevelsView.SetActive(true);
     }
 }

@@ -15,7 +15,7 @@ public class PlaneEntity : Entity
     [SerializeField] private float _forceUp;
     [SerializeField] private float _speedIncreaseGravity;
 
-    public PlaneView View => _planeView;
+    public override ViewEntity View => (PlaneView)_planeView;
     public PlaneController Controller => _planeController;
 
     public override void Initialize(Transform parent)

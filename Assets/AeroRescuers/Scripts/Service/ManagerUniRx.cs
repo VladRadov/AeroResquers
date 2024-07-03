@@ -16,13 +16,13 @@ public static class ManagerUniRx
         if (command.IsDisposed)
             return;
 
-        Dispose(command);
+        Disposeble(command);
     }
 
     public static void Dispose<T>(ReactiveProperty<T> property)
-        => Dispose(property);
+        => Disposeble(property);
 
-    private static void Dispose(IDisposable disposable)
+    private static void Disposeble(IDisposable disposable)
     {
         _objectsForDispose.Remove(disposable);
         disposable.Dispose();

@@ -25,6 +25,12 @@ public class PlaneController
         _planeView.SetBodyType(RigidbodyType2D.Static);
     }
 
+    public void SetPlaneDynamic()
+    {
+        _planeView.SetBodyType(RigidbodyType2D.Dynamic);
+        _planeView.SetGravity(_currentGravity);
+    }
+
     public void LossHeight(float speedIncreaseGravity)
     {
         _currentGravity += speedIncreaseGravity;

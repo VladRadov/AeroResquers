@@ -9,7 +9,7 @@ public class AirTunnelEntity : Entity
 
     [SerializeField] private AirTunnelView _airTunnelViewPrefab;
 
-    public AirTunnelView View => _airTunnelView;
+    public override ViewEntity View => _airTunnelView;
 
     public override void Initialize(Transform parent)
     {

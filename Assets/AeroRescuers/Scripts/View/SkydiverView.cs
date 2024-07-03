@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkydiverView : MonoBehaviour
+public class SkydiverView : ViewEntity
 {
     [SerializeField] private Rigidbody2D _rigidbody;
 

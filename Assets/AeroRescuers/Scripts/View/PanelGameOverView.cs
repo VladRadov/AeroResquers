@@ -29,7 +29,7 @@ public class PanelGameOverView : MonoBehaviour
 
     private void OnRestart()
     {
-
+        ManagerScenes.Instance.LoadAsyncFromCoroutine("Game");
     }
 
     private void OnQuit()

@@ -16,9 +16,16 @@ public class HealthManager : MonoBehaviour
     {
         _currentHealth -= countDamage;
         ViewCurrentHealth();
-
+        
         if (_currentHealth <= 0)
             GameOverCommand.Execute();
+    }
+
+    public void Die()
+    {
+        _currentHealth = 0;
+        ViewCurrentHealth();
+        GameOverCommand.Execute();
     }
 
     private void Start()
