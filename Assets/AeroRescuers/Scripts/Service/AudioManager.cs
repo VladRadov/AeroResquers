@@ -43,10 +43,15 @@ public class AudioManager : MonoBehaviour
 
     public void PlayUp() => PlaySound("Up", _audioSourceSound4);
 
+    public void PlayEnginePlane() => PlaySound("Engine", _audioSourceSound4, true);
+
     public void PlayPurchaseError() => PlaySound("PurchaseError", _audioSourceSound2);
 
     public void StopSoundPlaneFall()
         => _audioSourceSound2.Stop();
+
+    public void StopSoundEnginePlane()
+        => _audioSourceSound4.Stop();
 
     public void SaveVolume()
     {

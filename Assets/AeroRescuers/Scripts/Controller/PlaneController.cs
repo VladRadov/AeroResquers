@@ -23,12 +23,14 @@ public class PlaneController
     public void SetPlaneStatic()
     {
         _planeView.SetBodyType(RigidbodyType2D.Static);
+        AudioManager.Instance.StopSoundEnginePlane();
     }
 
     public void SetPlaneDynamic()
     {
         _planeView.SetBodyType(RigidbodyType2D.Dynamic);
         _planeView.SetGravity(_currentGravity);
+        AudioManager.Instance.PlayEnginePlane();
     }
 
     public void LossHeight(float speedIncreaseGravity)
