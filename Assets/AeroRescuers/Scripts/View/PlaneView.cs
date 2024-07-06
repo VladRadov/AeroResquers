@@ -7,6 +7,7 @@ public class PlaneView : ViewEntity
 {
     [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private SpriteRenderer _skin;
+    [SerializeField] private Animator _animator;
 
     public float CurrentGravity => _rigidbody.gravityScale;
 
@@ -27,6 +28,24 @@ public class PlaneView : ViewEntity
 
     public void SetGravity(float value)
         => _rigidbody.gravityScale = value;
+
+    public void PlayAnimationUp()
+    {
+        if (_animator != null)
+        {
+            _animator.SetTrigger("IsUp");
+            _animator.Play(0);
+        }
+    }
+
+    public void PlayAnimationDown()
+    {
+        if (_animator != null)
+        {
+            _animator.SetTrigger("IsDown");
+            _animator.Play(1);
+        }
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -68,13 +87,13 @@ public class PlaneView : ViewEntity
             AudioManager.Instance.PlayAirplaneTunnel();
             airTunnel.SetActive(false);
             OnCollisionAirTunnelCommand.Execute();
+            PlayAnimationUp();
         }
 
         var cloud = collision.gameObject.GetComponent<CloudView>();
         if (cloud != null && cloud.IsSetDamage == false)
         {
             AudioManager.Instance.PlayAttackCloud();
-            cloud.SetActive(false);
             cloud.SetDamaged();
             GetDamageCommand.Execute(cloud.Damage);
         }
@@ -93,5 +112,8 @@ public class PlaneView : ViewEntity
 
         if (_skin == null)
             _skin = GetComponent<SpriteRenderer>();
+
+        if (_animator == null)
+            _animator = GetComponent<Animator>();
     }
 }

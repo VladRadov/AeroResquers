@@ -11,24 +11,20 @@ public class PlaneEntity : Entity
     private PlaneController _planeController;
 
     [SerializeField] private PlaneView _planeViewPrefab;
-    [SerializeField] private List<SkinPlane> _skinsPlane;
+    [SerializeField] private SkinPlane _skinPlane;
     [SerializeField] private float _forceUp;
     [SerializeField] private float _speedIncreaseGravity;
 
     public override ViewEntity View => (PlaneView)_planeView;
     public PlaneController Controller => _planeController;
+    public SkinPlane SkinPlane => _skinPlane;
 
     public override void Initialize(Transform parent)
     {
-        var findedSkin = _skinsPlane.Find(skin => skin.Name == ContainerSaveerPlayerPrefs.Instance.SaveerData.CurrentSkin);
         _plane = new Plane(Vector2.up * _forceUp);
         _planeView = Instantiate(_planeViewPrefab, parent);
 
-        if(findedSkin != null)
-            _planeView.SetSkin(findedSkin.SpriteSkin);
-
         _planeController = new PlaneController(_plane, _planeView);
-
         _planeView.OnCollisionAirTunnelCommand.Subscribe(_ => { _planeController.RecoveryHeight(); });
     }
 

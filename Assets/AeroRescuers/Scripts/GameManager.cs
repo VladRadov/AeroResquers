@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     {
         CheckProgressEducation();
         _entities.Add(_levelManager.CurrentLevel);
+        _entities.Add(_levelManager.CurrentPlane);
 
         foreach (var entity in _entities)
         {

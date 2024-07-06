@@ -41,6 +41,7 @@ public class PlaneController
         {
             _plane.IsFall = true;
             AudioManager.Instance.PlayAirplaneFall();
+            _planeView.PlayAnimationDown();
         }
 
         _currentGravity += speedIncreaseGravity;

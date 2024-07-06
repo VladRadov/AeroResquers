@@ -25,8 +25,8 @@ public class SaveerDataInPlayerPrefs : SaveerData
     public float VolumeMusic { get { return Load<float>(KEY_VOLUME_MUSIC, 1); } set { Save<float>(KEY_VOLUME_MUSIC, value); } }
     public float VolumeSound { get { return Load<float>(KEY_VOLUME_SOUND, 1); } set { Save<float>(KEY_VOLUME_SOUND, value); } }
     public int IsVibrationOn { get { return Load<int>(KEY_IS_VIBRATION_ON, 1); } set { Save<int>(KEY_IS_VIBRATION_ON, value); } }
-    public string CurrentSkin { get { return Load<string>(KEY_CURRENT_SKINS, "Plane2"); } set { Save<string>(KEY_CURRENT_SKINS, value); } }
-    public string OpenSkins { get { return Load<string>(KEY_OPEN_SKINS, "Plane2"); } set { Save<string>(KEY_OPEN_SKINS, value); } }
+    public string CurrentSkin { get { return Load<string>(KEY_CURRENT_SKINS, "Plane1"); } set { Save<string>(KEY_CURRENT_SKINS, value); } }
+    public string OpenSkins { get { return Load<string>(KEY_OPEN_SKINS, "Plane1"); } set { Save<string>(KEY_OPEN_SKINS, value); } }
     public int TypeGame { get { return Load<int>(KEY_TYPE_GAME, 1); } set { Save<int>(KEY_TYPE_GAME, value); } }
     public int CurrentLevel { get { return Load<int>(KEY_CURRENT_LEVEL, 1); } set { Save<int>(KEY_CURRENT_LEVEL, value); } }
     public int MaxOpenedLevel { get { return Load<int>(KEY_MAX_OPENED_LEVEL, 1); } set { Save<int>(KEY_MAX_OPENED_LEVEL, value); } }

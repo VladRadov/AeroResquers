@@ -8,7 +8,7 @@ public class PlayPanelView : MonoBehaviour
     [SerializeField] private Button _back;
     [SerializeField] private Button _infinityGame;
     [SerializeField] private Button _storyGame;
-    [SerializeField] private ListLevelsView _listLevelsView;
+    [SerializeField] private LevelsView _levelsView;
 
     public void SetActive(bool value)
         => gameObject.SetActive(value);
@@ -24,7 +24,7 @@ public class PlayPanelView : MonoBehaviour
         _storyGame.onClick.AddListener(() =>
         {
             OnEntryStoryGame(TypeGame.Story);
-            _listLevelsView.SetActive(true);
+            _levelsView.SetActive(true);
         });
     }
 
