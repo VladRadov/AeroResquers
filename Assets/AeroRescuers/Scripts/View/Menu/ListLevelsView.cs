@@ -9,6 +9,7 @@ public class ListLevelsView : MonoBehaviour
     [SerializeField] private Transform _contentPanel;
     [SerializeField] private List<LevelEntity> _levels;
     [SerializeField] private Button _openListLevels;
+    [SerializeField] private Sprite _background;
     [SerializeField] private int _startNumberLevel;
     [SerializeField] private int _endNumberLevel;
     [Header("Открыть все уровни")]
@@ -36,10 +37,14 @@ public class ListLevelsView : MonoBehaviour
 
     private void CreateItemLevels(int maxLevel)
     {
+        int count = 1;
         for (int i = _startNumberLevel; i <= maxLevel; i++)
         {
             var levelItem = Instantiate(_levelItemViewPrefab, _contentPanel);
+            levelItem.SetViewNumberLevel(count);
             levelItem.SetNumberLevel(i);
+            levelItem.SetBackground(_background);
+            ++count;
         }
     }
 }

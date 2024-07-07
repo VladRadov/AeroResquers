@@ -74,7 +74,10 @@ public class PlaneView : ViewEntity
             if (enemy is SmokeEnemyView)
                 AudioManager.Instance.PlayAttackFire();
             else if (enemy is StoneView)
+            {
                 AudioManager.Instance.PlayAttackStone();
+                enemy.gameObject.SetActive(false);
+            }
             else if (enemy is WaveView)
                 AudioManager.Instance.PlayAttackWave();
 

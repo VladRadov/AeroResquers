@@ -26,4 +26,4 @@ MonoBehaviour:
   _enemyPrefabs: []
   _number: 8
   _startFramesMap: 6
-  _countMaxSkydrivers: 75
+  _countMaxSkydrivers: 45

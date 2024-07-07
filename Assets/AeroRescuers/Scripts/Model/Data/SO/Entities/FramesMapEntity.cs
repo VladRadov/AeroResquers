@@ -18,6 +18,7 @@ public class FramesMapEntity : Entity
     public override void Initialize(Transform parent)
     {
         _framesMapView = Instantiate(_framesMapViewPrefab, parent);
+        _framesMapView.transform.SetAsFirstSibling();
     }
 
     public override void FixedUpdate()

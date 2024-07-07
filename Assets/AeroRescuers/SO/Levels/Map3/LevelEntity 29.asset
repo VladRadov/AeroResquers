@@ -27,4 +27,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 913f5ede17c20fe40b9dcd7c9b3dd785, type: 2}
   _number: 30
   _startFramesMap: 6
-  _countMaxSkydrivers: 85
+  _countMaxSkydrivers: 55

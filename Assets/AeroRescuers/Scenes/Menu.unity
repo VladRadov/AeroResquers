@@ -5681,6 +5681,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1f19a0dccc869fc448210abfd1b2170e, type: 2}
   - {fileID: 11400000, guid: 6af29db30371a8c4ebf1e6c6e4e52649, type: 2}
   _openListLevels: {fileID: 971349819}
+  _background: {fileID: 21300000, guid: bfc6710571ca50f44ba02945ce5a1c17, type: 3}
   _startNumberLevel: 1
   _endNumberLevel: 10
   _isOpenAllLevels: 1
@@ -6409,7 +6410,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 24
+    m_FontSize: 22
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -6420,7 +6421,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 21-30 levels
+  m_Text: Canyons
 --- !u!222 &1105443169
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8023,6 +8024,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2ee77185746d0e440b52d1c32208f650, type: 2}
   - {fileID: 11400000, guid: d01a1a89d15414b44b84918e59f8dbb7, type: 2}
   _openListLevels: {fileID: 1322411029}
+  _background: {fileID: 21300000, guid: 1b407d02ba3d74949bb995f46fa8a78f, type: 3}
   _startNumberLevel: 21
   _endNumberLevel: 30
   _isOpenAllLevels: 0
@@ -8403,7 +8405,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 24
+    m_FontSize: 22
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -8414,7 +8416,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 11-20 levels
+  m_Text: Beach and sea
 --- !u!222 &1423515306
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10523,6 +10525,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a6127a56452bbd94eb5cc31d282ccd86, type: 2}
   - {fileID: 11400000, guid: f5cc17533c9039f4aa5ad39186f66e8b, type: 2}
   _openListLevels: {fileID: 1771466772}
+  _background: {fileID: 21300000, guid: 37fedc565ec9a4d42a60fe63f5b4d1f6, type: 3}
   _startNumberLevel: 11
   _endNumberLevel: 20
   _isOpenAllLevels: 0
@@ -11565,7 +11568,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 24
+    m_FontSize: 22
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -11576,7 +11579,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 1-10 levels
+  m_Text: Burning forest
 --- !u!222 &1884910295
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -16,8 +16,8 @@ public class CounterManager : MonoBehaviour
 
     public void IncreaseCountSkydrivers()
     {
-        var countSavedSkydrivers = int.Parse(_viewCountSavedSkydrivers.text) + 1;
-        _viewCountSavedSkydrivers.text = countSavedSkydrivers.ToString();
+        var countSavedSkydrivers = int.Parse(_viewCountSavedSkydrivers.text.Split('/')[0]) + 1;
+        _viewCountSavedSkydrivers.text = countSavedSkydrivers.ToString() + "/" + _countSavedSkydrivers.maxValue.ToString();
 
         if(_countSavedSkydrivers.maxValue != 0)
             _countSavedSkydrivers.value = countSavedSkydrivers;
@@ -35,7 +35,7 @@ public class CounterManager : MonoBehaviour
 
     private void Start()
     {
-        _viewCountSavedSkydrivers.text = "0";
+        _viewCountSavedSkydrivers.text = "0/0";
         _countSavedSkydrivers.value = 0;
 
         _viewCountMoney.text = "0";
