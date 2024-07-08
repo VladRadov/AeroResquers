@@ -10,8 +10,6 @@ public class ListLevelsView : MonoBehaviour
     [SerializeField] private List<LevelEntity> _levels;
     [SerializeField] private Button _openListLevels;
     [SerializeField] private Sprite _background;
-    [SerializeField] private int _startNumberLevel;
-    [SerializeField] private int _endNumberLevel;
     [Header("Открыть все уровни")]
     [SerializeField] private bool _isOpenAllLevels;
 
@@ -20,31 +18,47 @@ public class ListLevelsView : MonoBehaviour
 
     private void Start()
     {
-        var maxOpenedLevel = ContainerSaveerPlayerPrefs.Instance.SaveerData.MaxOpenedLevel;
-        CreateItemLevels(_isOpenAllLevels ? _endNumberLevel : maxOpenedLevel);
+        if (_isOpenAllLevels)
+            ViewAllItemLevels();
+        else
+            ViewItemLevels();
+
         _openListLevels.onClick.AddListener(() =>
         {
             AudioManager.Instance.PlayClickButton();
             SetActive(true);
         });
-
-        if (TryOpenedLocation() == false)
-            _openListLevels.enabled = false;
     }
 
-    private bool TryOpenedLocation()
-        => ContainerSaveerPlayerPrefs.Instance.SaveerData.MaxOpenedLevel >= _startNumberLevel;
-
-    private void CreateItemLevels(int maxLevel)
+    private void ViewItemLevels()
     {
         int count = 1;
-        for (int i = _startNumberLevel; i <= maxLevel; i++)
+        var openedLevels = ContainerSaveerPlayerPrefs.Instance.SaveerData.OpenedLevels;
+        for (int i = 0; i < _levels.Count; i++)
         {
-            var levelItem = Instantiate(_levelItemViewPrefab, _contentPanel);
-            levelItem.SetViewNumberLevel(count);
-            levelItem.SetNumberLevel(i);
-            levelItem.SetBackground(_background);
+            if (openedLevels.Contains(_levels[i].LevelNumber + ";"))
+            {
+                CreateLevelItem(count, _levels[i].LevelNumber);
+                ++count;
+            }
+        }
+    }
+
+    private void ViewAllItemLevels()
+    {
+        int count = 1;
+        for (int i = 0; i < _levels.Count; i++)
+        {
+            CreateLevelItem(count, _levels[i].LevelNumber);
             ++count;
         }
+    }
+
+    private void CreateLevelItem(int numberLevelView, int numberLevel)
+    {
+        var levelItem = Instantiate(_levelItemViewPrefab, _contentPanel);
+        levelItem.SetViewNumberLevel(numberLevelView);
+        levelItem.SetNumberLevel(numberLevel);
+        levelItem.SetBackground(_background);
     }
 }

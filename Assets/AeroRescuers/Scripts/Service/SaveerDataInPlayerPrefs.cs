@@ -18,6 +18,7 @@ public class SaveerDataInPlayerPrefs : SaveerData
     private readonly string KEY_MAX_OPENED_LEVEL = "MaxOpenedLevel";
     private readonly string KEY_MAX_LEVEL = "MaxLevel";
     private readonly string KEY_IS_EDUCATION = "IsEducation";
+    private readonly string KEY_OPENED_LEVELS = "OpenedLevels";
 
     public int Money { get { return Load<int>(KEY_COUNT_MONEY, 0); } set { Save<int>(KEY_COUNT_MONEY, value); } }
     public int CountSkydriver { get { return Load<int>(KEY_COUNT_SKYDRIVER, 0); } set { Save<int>(KEY_COUNT_SKYDRIVER, value); } }
@@ -32,6 +33,7 @@ public class SaveerDataInPlayerPrefs : SaveerData
     public int MaxOpenedLevel { get { return Load<int>(KEY_MAX_OPENED_LEVEL, 1); } set { Save<int>(KEY_MAX_OPENED_LEVEL, value); } }
     public int MaxLevel { get { return Load<int>(KEY_MAX_LEVEL, 1); } set { Save<int>(KEY_MAX_LEVEL, value); } }
     public int IsEducation { get { return Load<int>(KEY_IS_EDUCATION, 0); } set { Save<int>(KEY_IS_EDUCATION, value); } }
+    public string OpenedLevels { get { return Load<string>(KEY_OPENED_LEVELS, "1;11;21;"); } set { Save<string>(KEY_OPENED_LEVELS, value); } }
 
     public override T Load<T>(string nameParameter, T defaultValue)
     {

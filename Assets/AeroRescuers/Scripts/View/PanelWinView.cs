@@ -32,8 +32,8 @@ public class PanelWinView : MonoBehaviour
             return;
         }
 
-        if (ContainerSaveerPlayerPrefs.Instance.SaveerData.CurrentLevel == ContainerSaveerPlayerPrefs.Instance.SaveerData.MaxOpenedLevel)
-            ContainerSaveerPlayerPrefs.Instance.SaveerData.MaxOpenedLevel = ContainerSaveerPlayerPrefs.Instance.SaveerData.MaxOpenedLevel + 1;
+        if (ContainerSaveerPlayerPrefs.Instance.SaveerData.OpenedLevels.Contains((ContainerSaveerPlayerPrefs.Instance.SaveerData.CurrentLevel + 1).ToString() + ";") == false)
+            ContainerSaveerPlayerPrefs.Instance.SaveerData.OpenedLevels += (ContainerSaveerPlayerPrefs.Instance.SaveerData.CurrentLevel + 1).ToString() + ";";
 
         ContainerSaveerPlayerPrefs.Instance.SaveerData.CurrentLevel = ContainerSaveerPlayerPrefs.Instance.SaveerData.CurrentLevel + 1;
     }

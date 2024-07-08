@@ -5682,9 +5682,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6af29db30371a8c4ebf1e6c6e4e52649, type: 2}
   _openListLevels: {fileID: 971349819}
   _background: {fileID: 21300000, guid: bfc6710571ca50f44ba02945ce5a1c17, type: 3}
-  _startNumberLevel: 1
-  _endNumberLevel: 10
-  _isOpenAllLevels: 1
+  _isOpenAllLevels: 0
 --- !u!1 &975449015
 GameObject:
   m_ObjectHideFlags: 0
@@ -8025,8 +8023,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d01a1a89d15414b44b84918e59f8dbb7, type: 2}
   _openListLevels: {fileID: 1322411029}
   _background: {fileID: 21300000, guid: 1b407d02ba3d74949bb995f46fa8a78f, type: 3}
-  _startNumberLevel: 21
-  _endNumberLevel: 30
   _isOpenAllLevels: 0
 --- !u!1 &1341030207
 GameObject:
@@ -10526,8 +10522,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f5cc17533c9039f4aa5ad39186f66e8b, type: 2}
   _openListLevels: {fileID: 1771466772}
   _background: {fileID: 21300000, guid: 37fedc565ec9a4d42a60fe63f5b4d1f6, type: 3}
-  _startNumberLevel: 11
-  _endNumberLevel: 20
   _isOpenAllLevels: 0
 --- !u!1 &1776216119
 GameObject:
