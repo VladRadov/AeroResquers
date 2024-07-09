@@ -9,7 +9,8 @@ public class ListLevelsView : MonoBehaviour
     [SerializeField] private Transform _contentPanel;
     [SerializeField] private List<LevelEntity> _levels;
     [SerializeField] private Button _openListLevels;
-    [SerializeField] private Sprite _background;
+    [SerializeField] private Transform _background;
+    [SerializeField] private List<Transform> _backgroundsClose;
     [Header("Открыть все уровни")]
     [SerializeField] private bool _isOpenAllLevels;
 
@@ -25,7 +26,11 @@ public class ListLevelsView : MonoBehaviour
 
         _openListLevels.onClick.AddListener(() =>
         {
+            foreach (var background in _backgroundsClose)
+                background.gameObject.SetActive(false);
+
             AudioManager.Instance.PlayClickButton();
+            _background.gameObject.SetActive(true);
             SetActive(true);
         });
     }
@@ -59,6 +64,5 @@ public class ListLevelsView : MonoBehaviour
         var levelItem = Instantiate(_levelItemViewPrefab, _contentPanel);
         levelItem.SetViewNumberLevel(numberLevelView);
         levelItem.SetNumberLevel(numberLevel);
-        levelItem.SetBackground(_background);
     }
 }

@@ -8,7 +8,6 @@ public class LevelItemView : MonoBehaviour
     [SerializeField] private int _numberLevel;
     [SerializeField] private Button _play;
     [SerializeField] private Text _numberLevelView;
-    [SerializeField] private Image _background;
     [SerializeField] private int _viewNumberLevel;
 
     public void SetNumberLevel(int number)
@@ -16,9 +15,6 @@ public class LevelItemView : MonoBehaviour
 
     public void SetViewNumberLevel(int numberLevel)
         => _viewNumberLevel = numberLevel;
-
-    public void SetBackground(Sprite bg)
-        => _background.sprite = bg;
 
     private void Start()
     {
