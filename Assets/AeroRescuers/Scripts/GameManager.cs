@@ -124,7 +124,10 @@ public class GameManager : MonoBehaviour
     {
         AudioManager.Instance.StopSoundPlaneFall();
         AudioManager.Instance.PlayGameOver();
-        _panelGameOverView.SetActive(true);
+
+        if(_panelGameOverView != null)
+            _panelGameOverView.SetActive(true);
+
         _isPause = true;
     }
 

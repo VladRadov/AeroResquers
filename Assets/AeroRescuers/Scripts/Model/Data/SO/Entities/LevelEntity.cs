@@ -117,7 +117,7 @@ public class LevelEntity : Entity
     private void InitializeAirTunnel(FrameMapView frameMap)
     {
         var x = Random.Range(-frameMap.Width / 4, frameMap.Width / 4);
-        var y = Random.Range(0, frameMap.Height / 2);
+        var y = Random.Range(-frameMap.Height / 4, frameMap.Height / 2);
         var airTunnelEntity = Instantiate(_airTunnelEntityPrefab);
         airTunnelEntity.Initialize(frameMap.transform);
         airTunnelEntity.View.transform.localPosition = new Vector3(x, y, 0);
@@ -125,13 +125,12 @@ public class LevelEntity : Entity
 
     private void InitializeCloud(FrameMapView frameMap)
     {
-        var countClouds = Random.Range(1, 3);
+        var countClouds = ContainerSaveerPlayerPrefs.Instance.SaveerData.TypeGame == 0 ? Random.Range(0, 2) : Random.Range(1, 3);
 
         for (int i = 0; i < countClouds; i++)
         {
             var indexCloud = Random.Range(0, _cloudEntityPrefab.Count);
             var x = Random.Range(-frameMap.Width / 4, frameMap.Width / 4);
-            var y = Random.Range(0, frameMap.Height / 2);
 
             var cloud = _cloudEntityPrefab[indexCloud];
             cloud.Initialize(frameMap.transform);
@@ -141,15 +140,19 @@ public class LevelEntity : Entity
 
     private void InitializeEnemy(FrameMapView frameMap)
     {
-        for (int i = 0; i < _enemyPrefabs.Count; i++)
+        var count = ContainerSaveerPlayerPrefs.Instance.SaveerData.TypeGame == 0 ? Random.Range(0, _enemyPrefabs.Count) : _enemyPrefabs.Count;
+
+        for (int i = 0; i < count; i++)
         {
             var x = Random.Range(-frameMap.Width / 4, frameMap.Width / 4);
             float y = (frameMap.Height / 2) - 10;
 
-            if (_enemyPrefabs[i] is WaveEntity)
+            var indexEnemy = Random.Range(0, _enemyPrefabs.Count);
+
+            if (_enemyPrefabs[indexEnemy] is WaveEntity)
                 y = Random.Range(-frameMap.Height / 4, - frameMap.Height / 2);
 
-            var wave = Instantiate(_enemyPrefabs[i]);
+            var wave = Instantiate(_enemyPrefabs[indexEnemy]);
             wave.Initialize(frameMap.transform);
             wave.View.transform.localPosition = new Vector3(x, y, 0);
         }

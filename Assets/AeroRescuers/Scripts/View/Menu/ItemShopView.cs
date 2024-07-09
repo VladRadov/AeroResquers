@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using UniRx;
 
 public class ItemShopView : MonoBehaviour
@@ -12,7 +11,7 @@ public class ItemShopView : MonoBehaviour
     [Header("Data")]
     [SerializeField] private SkinPlane _skinPlane;
     [Header("UI")]
-    [SerializeField] private TextMeshProUGUI _priceView;
+    [SerializeField] private Text _priceView;
     [SerializeField] private GameObject _purchase;
     [SerializeField] private GameObject _purchased;
     [SerializeField] private GameObject _selected;

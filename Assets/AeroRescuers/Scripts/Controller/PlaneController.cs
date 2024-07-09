@@ -6,18 +6,21 @@ public class PlaneController
 {
     private Plane _plane;
     private PlaneView _planeView;
-    private float _currentGravity;
+    private const int _speedRotation = 5;
 
     public PlaneController(Plane plane, PlaneView planeView)
     {
         _plane = plane;
         _planeView = planeView;
-        _currentGravity = _planeView.CurrentGravity;
     }
 
     public void FlyingUp()
+        => _planeView.UpdateForce(_plane.ForceFly);
+
+    public void RotationPlane(int speedRotation, float sensitivityRotation)
     {
-        _planeView.UpdateForce(_plane.ForceUp);
+        var angleRotation = Quaternion.Lerp(_planeView.transform.rotation, Quaternion.Euler(0, 0, _plane.ForceFly.y * speedRotation), sensitivityRotation);
+        _planeView.Rotation(angleRotation);
     }
 
     public void SetPlaneStatic()
@@ -29,25 +32,23 @@ public class PlaneController
     public void SetPlaneDynamic()
     {
         _planeView.SetBodyType(RigidbodyType2D.Dynamic);
-        _planeView.SetGravity(_currentGravity);
         AudioManager.Instance.PlayEnginePlane();
     }
 
     public void LossHeight(float speedIncreaseGravity)
     {
-        if (_currentGravity < 7 && _plane.IsFall)
+        if (_plane.ForceDown.y > -1.5 && _plane.IsFall)
             _plane.IsFall = false;
-        else if (_currentGravity >= 7 && _plane.IsFall == false)
+        else if (_plane.ForceDown.y <= -1.5 && _plane.IsFall == false)
         {
             _plane.IsFall = true;
             AudioManager.Instance.PlayAirplaneFall();
-            _planeView.PlayAnimationDown();
+            //_planeView.PlayAnimationDown();
         }
 
-        _currentGravity += speedIncreaseGravity;
-        _planeView.SetGravity(_currentGravity);
+        _plane.LossHeight(speedIncreaseGravity);
     }
 
     public void RecoveryHeight()
-        => _currentGravity = 1;
+        => _plane.RecoveryHeight();
 }

@@ -32,12 +32,15 @@ public class PlaneView : ViewEntity
     public void SetGravity(float value)
         => _rigidbody.gravityScale = value;
 
+    public void Rotation(Quaternion target)
+        => transform.rotation = target;
+
     public void PlayAnimationUp()
     {
         if (_animator != null)
         {
             _animator.SetTrigger("IsUp");
-            _animator.Play(0);
+            _animator.Play("PlaneRedFly");
         }
     }
 
@@ -46,7 +49,7 @@ public class PlaneView : ViewEntity
         if (_animator != null)
         {
             _animator.SetTrigger("IsDown");
-            _animator.Play(1);
+            _animator.Play("PlaneRedDown");
         }
     }
 
@@ -93,7 +96,7 @@ public class PlaneView : ViewEntity
             AudioManager.Instance.PlayAirplaneTunnel();
             airTunnel.SetActive(false);
             OnCollisionAirTunnelCommand.Execute();
-            PlayAnimationUp();
+            //PlayAnimationUp();
         }
 
         var cloud = collision.gameObject.GetComponent<CloudView>();

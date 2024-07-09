@@ -14,6 +14,8 @@ public class PlaneEntity : Entity
     [SerializeField] private SkinPlane _skinPlane;
     [SerializeField] private float _forceUp;
     [SerializeField] private float _speedIncreaseGravity;
+    [SerializeField] private int _speedRotation;
+    [SerializeField] private float _sensitivityRotation;
 
     public override ViewEntity View => (PlaneView)_planeView;
     public PlaneController Controller => _planeController;
@@ -31,6 +33,7 @@ public class PlaneEntity : Entity
     public override void FixedUpdate()
     {
         _planeController.LossHeight(_speedIncreaseGravity);
+        _planeController.RotationPlane(_speedRotation, _sensitivityRotation);
     }
 
     public override void AddObjectDisposable()
