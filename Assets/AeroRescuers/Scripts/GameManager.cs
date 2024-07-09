@@ -60,6 +60,7 @@ public class GameManager : MonoBehaviour
         LevelEntity level = GetEntity<LevelEntity>();
 
         _counterManager.SetMaxSaveSkydrivers(level.CountMaxSkydrivers);
+        _counterManager.ViewCountSkydrivers(0);
 
         _healthManager.GameOverCommand.Subscribe(_ => { OnGameOver(); plane.Controller.SetPlaneStatic(); });
         level.OnWinLevelCommand.Subscribe(_ => { OnWinLevel(); plane.Controller.SetPlaneStatic(); });

@@ -147,7 +147,7 @@ public class LevelEntity : Entity
             float y = (frameMap.Height / 2) - 10;
 
             if (_enemyPrefabs[i] is WaveEntity)
-                y = Random.Range(0, - frameMap.Height / 2);
+                y = Random.Range(-frameMap.Height / 4, - frameMap.Height / 2);
 
             var wave = Instantiate(_enemyPrefabs[i]);
             wave.Initialize(frameMap.transform);

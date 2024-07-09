@@ -17,12 +17,7 @@ public class CounterManager : MonoBehaviour
     public void IncreaseCountSkydrivers()
     {
         var countSavedSkydrivers = int.Parse(_viewCountSavedSkydrivers.text.Split('/')[0]) + 1;
-        _viewCountSavedSkydrivers.text = countSavedSkydrivers.ToString() + "/" + _countSavedSkydrivers.maxValue.ToString();
-
-        if(_countSavedSkydrivers.maxValue != 0)
-            _countSavedSkydrivers.value = countSavedSkydrivers;
-
-        ContainerSaveerPlayerPrefs.Instance.SaveerData.CountSkydriver = countSavedSkydrivers;
+        ViewCountSkydrivers(countSavedSkydrivers);
     }
 
     public void IncreaseCountMoney()
@@ -33,11 +28,18 @@ public class CounterManager : MonoBehaviour
         ContainerSaveerPlayerPrefs.Instance.SaveerData.Money += 1;
     }
 
+    public void ViewCountSkydrivers(int countSavedSkydrivers)
+    {
+        _viewCountSavedSkydrivers.text = _countSavedSkydrivers.maxValue != 0 ? countSavedSkydrivers.ToString() + "/" + _countSavedSkydrivers.maxValue.ToString() : countSavedSkydrivers.ToString();
+
+        if (_countSavedSkydrivers.maxValue != 0)
+            _countSavedSkydrivers.value = countSavedSkydrivers;
+
+        ContainerSaveerPlayerPrefs.Instance.SaveerData.CountSkydriver = countSavedSkydrivers;
+    }
+
     private void Start()
     {
-        _viewCountSavedSkydrivers.text = "0/0";
-        _countSavedSkydrivers.value = 0;
-
         _viewCountMoney.text = "0";
         ContainerSaveerPlayerPrefs.Instance.SaveerData.GameMoney = 0;
         ContainerSaveerPlayerPrefs.Instance.SaveerData.CountSkydriver = 0;

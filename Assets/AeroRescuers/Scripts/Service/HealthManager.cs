@@ -25,7 +25,9 @@ public class HealthManager : MonoBehaviour
     {
         _currentHealth = 0;
         ViewCurrentHealth();
-        GameOverCommand.Execute();
+
+        if(GameOverCommand.IsDisposed == false)
+            GameOverCommand.Execute();
     }
 
     private void Start()

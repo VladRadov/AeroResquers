@@ -24,7 +24,7 @@ public class SaveerDataInPlayerPrefs : SaveerData
     public int CountSkydriver { get { return Load<int>(KEY_COUNT_SKYDRIVER, 0); } set { Save<int>(KEY_COUNT_SKYDRIVER, value); } }
     public int GameMoney { get { return Load<int>(KEY_COUNT_GAME_MONEY, 0); } set { Save<int>(KEY_COUNT_GAME_MONEY, value); } }
     public float VolumeMusic { get { return Load<float>(KEY_VOLUME_MUSIC, 1); } set { Save<float>(KEY_VOLUME_MUSIC, value); } }
-    public float VolumeSound { get { return Load<float>(KEY_VOLUME_SOUND, 1); } set { Save<float>(KEY_VOLUME_SOUND, value); } }
+    public float VolumeSound { get { return Load<float>(KEY_VOLUME_SOUND, 0.7f); } set { Save<float>(KEY_VOLUME_SOUND, value); } }
     public int IsVibrationOn { get { return Load<int>(KEY_IS_VIBRATION_ON, 1); } set { Save<int>(KEY_IS_VIBRATION_ON, value); } }
     public string CurrentSkin { get { return Load<string>(KEY_CURRENT_SKINS, "Plane1"); } set { Save<string>(KEY_CURRENT_SKINS, value); } }
     public string OpenSkins { get { return Load<string>(KEY_OPEN_SKINS, "Plane1"); } set { Save<string>(KEY_OPEN_SKINS, value); } }

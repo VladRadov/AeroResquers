@@ -18,8 +18,11 @@ public class StoneView : EnemyView
     private async void Fall()
     {
         await Task.Delay(1500);
-        _rigidbody.bodyType = RigidbodyType2D.Dynamic;
-        _rigidbody.gravityScale = 0.5f;
+        if (_rigidbody != null)
+        {
+            _rigidbody.bodyType = RigidbodyType2D.Dynamic;
+            _rigidbody.gravityScale = 0.5f;
+        }
     }
 
     private void OnValidate()

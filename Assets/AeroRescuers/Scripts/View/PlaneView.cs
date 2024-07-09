@@ -21,7 +21,10 @@ public class PlaneView : ViewEntity
         => _skin.sprite = skin;
 
     public void UpdateForce(Vector2 force)
-        => _rigidbody.velocity = force;
+    {
+        if(_rigidbody.bodyType == RigidbodyType2D.Dynamic)
+            _rigidbody.velocity = force;
+    }
 
     public void SetBodyType(RigidbodyType2D bodyType)
         => _rigidbody.bodyType = bodyType;
