@@ -9,13 +9,10 @@ public class ListLevelsView : MonoBehaviour
     [SerializeField] private Transform _contentPanel;
     [SerializeField] private List<LevelEntity> _levels;
     [SerializeField] private Button _openListLevels;
-    [SerializeField] private Transform _background;
-    [SerializeField] private List<Transform> _backgroundsClose;
+    [SerializeField] private Button _closePanel;
+    [SerializeField] private GameObject _parentContent;
     [Header("Открыть все уровни")]
     [SerializeField] private bool _isOpenAllLevels;
-
-    public void SetActive(bool value)
-        => _contentPanel.parent.gameObject.SetActive(value);
 
     private void Start()
     {
@@ -24,14 +21,12 @@ public class ListLevelsView : MonoBehaviour
         else
             ViewItemLevels();
 
+        _closePanel.onClick.AddListener(() => { _parentContent.SetActive(false); });
+
         _openListLevels.onClick.AddListener(() =>
         {
-            foreach (var background in _backgroundsClose)
-                background.gameObject.SetActive(false);
-
             AudioManager.Instance.PlayClickButton();
-            _background.gameObject.SetActive(true);
-            SetActive(true);
+            _parentContent.SetActive(true);
         });
     }
 
