@@ -81,7 +81,6 @@ public class GameManager : MonoBehaviour
         {
             _startGame.gameObject.SetActive(false);
             _isPause = false;
-            //plane.Controller.SetPlaneDynamic();
             plane.Controller.StartFly();
         });
         _panelPauseView.OnContinueGameCommand.Subscribe(_ => { OnContinueGame(); plane.Controller.SetPlaneDynamic(); });

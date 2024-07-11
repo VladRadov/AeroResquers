@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -49,24 +50,27 @@ public class PlaneController
         _plane.LossHeight(speedIncreaseGravity);
     }
 
-    public void StartFly()
+    public async void StartFly()
     {
         _tragetPosition = new Vector3(-193, 28, 0);
         _planeView.PlayAnimationUp();
+        await Task.Delay(4000);
+        _plane.IsFly = true;
+        SetPlaneDynamic();
     }
 
     public void Flying()
     {
-        if (Vector3.Distance(_planeView.transform.localPosition, _tragetPosition) <= 0.1)
-        {
-            _plane.IsFly = true;
-            SetPlaneDynamic();
-        }
-        else
-        {
+        //if (Vector3.Distance(_planeView.transform.localPosition, _tragetPosition) <= 0.1)
+        //{
+        //    _plane.IsFly = true;
+        //    SetPlaneDynamic();
+        //}
+        //else
+        //{
             var target = Vector3.MoveTowards(_planeView.transform.localPosition, _tragetPosition, 0.7f);
             _planeView.UpdateLocalPosition(target);
-        }
+        //}
     }
 
     public void RecoveryHeight()

@@ -55,7 +55,7 @@ public class LevelEntity : Entity
                 InitializeEnemy(frameMap);
             });
 
-            if (ContainerSaveerPlayerPrefs.Instance.SaveerData.TypeGame == 0 ? i >= 2 : i >= 1)
+            if (i != 0)
             {
                 InitializeSkydriver(frameMapView);
                 InitializeMoney(frameMapView);
