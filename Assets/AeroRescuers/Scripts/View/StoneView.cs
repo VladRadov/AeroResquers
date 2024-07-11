@@ -17,7 +17,7 @@ public class StoneView : EnemyView
 
     private async void Fall()
     {
-        await Task.Delay(1500);
+        await Task.Delay(1000);
         if (_rigidbody != null)
         {
             _rigidbody.bodyType = RigidbodyType2D.Dynamic;

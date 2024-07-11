@@ -16,6 +16,13 @@ public class LevelItemView : MonoBehaviour
     public void SetViewNumberLevel(int numberLevel)
         => _viewNumberLevel = numberLevel;
 
+    public void SetActiveButtonPlay(bool value)
+    {
+        _play.enabled = value;
+        var image = _play.gameObject.GetComponent<Image>();
+        image.color = new Color(1, 1, 1, value ? 1 : 0.4f);
+    }
+
     private void Start()
     {
         _numberLevelView.text = _viewNumberLevel.ToString();

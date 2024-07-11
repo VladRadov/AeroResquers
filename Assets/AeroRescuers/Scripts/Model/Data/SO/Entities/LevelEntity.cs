@@ -32,49 +32,42 @@ public class LevelEntity : Entity
         OnWinLevelCommand = new();
         _levelController = new LevelController();
 
+        var airstripFrameMap = Instantiate(_airstripPrefab, parent);
+        airstripFrameMap.Initialize(parent);
+
         for (int i = 0; i < _startFramesMap; i++)
         {
-            if (i == 0)
+            var frameMap = Instantiate(_frameMapEntityPrefab, parent);
+            frameMap.Initialize(parent);
+            FrameMapView frameMapView = (FrameMapView)frameMap.View;
+
+            if (i % 2 == 0)
+                frameMap.Controller.RotateBack();
+            
+            frameMap.Controller.UpdatePosition((i + 1) * new Vector3(frameMapView.Width, 0, 0));
+            frameMapView.OffsetFrameBack.Subscribe((frameMap) =>
             {
-                var frameMap = Instantiate(_airstripPrefab, parent);
-                frameMap.Initialize(parent);
-            }
-            else
+                _levelController.ChangeLastFrameMap(frameMap);
+                InitializeSkydriver(frameMap);
+                InitializeMoney(frameMap);
+                InitializeAirTunnel(frameMap);
+                InitializeCloud(frameMap);
+                InitializeEnemy(frameMap);
+            });
+
+            if (ContainerSaveerPlayerPrefs.Instance.SaveerData.TypeGame == 0 ? i >= 2 : i >= 1)
             {
-                var frameMap = Instantiate(_frameMapEntityPrefab, parent);
-                frameMap.Initialize(parent);
-                FrameMapView frameMapView = (FrameMapView)frameMap.View;
-
-                if (i % 2 == 0)
-                    frameMap.Controller.RotateBack();
-
-                if (i != 0)
-                    frameMap.Controller.UpdatePosition(i * new Vector3(frameMapView.Width, 0, 0));
-
-                frameMapView.OffsetFrameBack.Subscribe((frameMap) =>
-                {
-                    _levelController.ChangeLastFrameMap(frameMap);
-                    InitializeSkydriver(frameMap);
-                    InitializeMoney(frameMap);
-                    InitializeAirTunnel(frameMap);
-                    InitializeCloud(frameMap);
-                    InitializeEnemy(frameMap);
-                });
-
-                if (i != 0)
-                {
-                    InitializeSkydriver(frameMapView);
-                    InitializeMoney(frameMapView);
-                    InitializeAirTunnel(frameMapView);
-                    InitializeCloud(frameMapView);
-                    InitializeEnemy(frameMapView);
-                }
-
-                if (i == _startFramesMap - 1)
-                    _levelController.SetLastFrameMapEntity(frameMap.View.transform.localPosition);
-
-                _levelController.AddFrameMapEntity(frameMap);
+                InitializeSkydriver(frameMapView);
+                InitializeMoney(frameMapView);
+                InitializeAirTunnel(frameMapView);
+                InitializeCloud(frameMapView);
+                InitializeEnemy(frameMapView);
             }
+
+            if (i == _startFramesMap - 1)
+                _levelController.SetLastFrameMapEntity(frameMap.View.transform.localPosition);
+
+            _levelController.AddFrameMapEntity(frameMap);
         }
     }
 
@@ -134,7 +127,7 @@ public class LevelEntity : Entity
 
     private void InitializeCloud(FrameMapView frameMap)
     {
-        var countClouds = ContainerSaveerPlayerPrefs.Instance.SaveerData.TypeGame == 0 ? Random.Range(0, 2) : Random.Range(1, 3);
+        var countClouds = ContainerSaveerPlayerPrefs.Instance.SaveerData.TypeGame == 0 ? Random.Range(0, 3) : Random.Range(1, 3);
 
         for (int i = 0; i < countClouds; i++)
         {

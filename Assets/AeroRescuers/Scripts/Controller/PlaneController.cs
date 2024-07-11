@@ -64,7 +64,7 @@ public class PlaneController
         }
         else
         {
-            var target = Vector3.MoveTowards(_planeView.transform.localPosition, _tragetPosition, 0.5f);
+            var target = Vector3.MoveTowards(_planeView.transform.localPosition, _tragetPosition, 0.7f);
             _planeView.UpdateLocalPosition(target);
         }
     }

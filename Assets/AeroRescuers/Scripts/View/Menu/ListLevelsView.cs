@@ -36,11 +36,9 @@ public class ListLevelsView : MonoBehaviour
         var openedLevels = ContainerSaveerPlayerPrefs.Instance.SaveerData.OpenedLevels;
         for (int i = 0; i < _levels.Count; i++)
         {
-            if (openedLevels.Contains(_levels[i].LevelNumber + ";"))
-            {
-                CreateLevelItem(count, _levels[i].LevelNumber);
-                ++count;
-            }
+            var levelItem = CreateLevelItem(count, _levels[i].LevelNumber);
+            levelItem.SetActiveButtonPlay(openedLevels.Contains(_levels[i].LevelNumber + ";") ? true : false);
+            ++count;
         }
     }
 
@@ -54,10 +52,12 @@ public class ListLevelsView : MonoBehaviour
         }
     }
 
-    private void CreateLevelItem(int numberLevelView, int numberLevel)
+    private LevelItemView CreateLevelItem(int numberLevelView, int numberLevel)
     {
         var levelItem = Instantiate(_levelItemViewPrefab, _contentPanel);
         levelItem.SetViewNumberLevel(numberLevelView);
         levelItem.SetNumberLevel(numberLevel);
+
+        return levelItem;
     }
 }
