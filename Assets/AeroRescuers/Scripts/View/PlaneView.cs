@@ -27,10 +27,16 @@ public class PlaneView : ViewEntity
     }
 
     public void SetBodyType(RigidbodyType2D bodyType)
-        => _rigidbody.bodyType = bodyType;
+    {
+        if(_rigidbody != null)
+            _rigidbody.bodyType = bodyType;
+    }
 
     public void SetGravity(float value)
-        => _rigidbody.gravityScale = value;
+    {
+        if (_rigidbody != null)
+            _rigidbody.gravityScale = value;
+    }
 
     public void Rotation(Quaternion target)
         => transform.rotation = target;
