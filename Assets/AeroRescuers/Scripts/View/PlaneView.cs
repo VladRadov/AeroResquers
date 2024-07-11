@@ -39,17 +39,7 @@ public class PlaneView : ViewEntity
     {
         if (_animator != null)
         {
-            _animator.SetTrigger("IsUp");
-            _animator.Play("PlaneRedFly");
-        }
-    }
-
-    public void PlayAnimationDown()
-    {
-        if (_animator != null)
-        {
-            _animator.SetTrigger("IsDown");
-            _animator.Play("PlaneRedDown");
+            _animator.SetTrigger("IsFly");
         }
     }
 

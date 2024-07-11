@@ -25,15 +25,22 @@ public class PlaneEntity : Entity
     {
         _plane = new Plane(Vector2.up * _forceUp);
         _planeView = Instantiate(_planeViewPrefab, parent);
+        _planeView.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(400, 420, 0));
+        _planeView.transform.localPosition = new Vector3(_planeView.transform.localPosition.x, _planeView.transform.localPosition.y, 0);
 
-        _planeController = new PlaneController(_plane, _planeView);
+       _planeController = new PlaneController(_plane, _planeView);
         _planeView.OnCollisionAirTunnelCommand.Subscribe(_ => { _planeController.RecoveryHeight(); });
     }
 
     public override void FixedUpdate()
     {
-        _planeController.LossHeight(_speedIncreaseGravity);
-        _planeController.RotationPlane(_speedRotation, _sensitivityRotation);
+        if (_plane.IsFly)
+        {
+            _planeController.LossHeight(_speedIncreaseGravity);
+            _planeController.RotationPlane(_speedRotation, _sensitivityRotation);
+        }
+        else
+            _planeController.Flying();
     }
 
     public override void AddObjectDisposable()

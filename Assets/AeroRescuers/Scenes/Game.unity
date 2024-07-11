@@ -245,6 +245,7 @@ MonoBehaviour:
   _viewCountSavedSkydrivers: {fileID: 2086270873}
   _countSavedSkydrivers: {fileID: 1594396677}
   _viewCountMoney: {fileID: 1389389834}
+  _titleCounter: {fileID: 960870179}
 --- !u!1 &168589801
 GameObject:
   m_ObjectHideFlags: 0

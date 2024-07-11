@@ -7,6 +7,7 @@ public class PlaneController
     private Plane _plane;
     private PlaneView _planeView;
     private const int _speedRotation = 5;
+    private Vector3 _tragetPosition;
 
     public PlaneController(Plane plane, PlaneView planeView)
     {
@@ -43,10 +44,29 @@ public class PlaneController
         {
             _plane.IsFall = true;
             AudioManager.Instance.PlayAirplaneFall();
-            //_planeView.PlayAnimationDown();
         }
 
         _plane.LossHeight(speedIncreaseGravity);
+    }
+
+    public void StartFly()
+    {
+        _tragetPosition = new Vector3(-193, 28, 0);
+        _planeView.PlayAnimationUp();
+    }
+
+    public void Flying()
+    {
+        if (Vector3.Distance(_planeView.transform.localPosition, _tragetPosition) <= 0.1)
+        {
+            _plane.IsFly = true;
+            SetPlaneDynamic();
+        }
+        else
+        {
+            var target = Vector3.MoveTowards(_planeView.transform.localPosition, _tragetPosition, 0.5f);
+            _planeView.UpdateLocalPosition(target);
+        }
     }
 
     public void RecoveryHeight()

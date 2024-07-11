@@ -10,6 +10,7 @@ public class CounterManager : MonoBehaviour
     [SerializeField] private Slider _countSavedSkydrivers;
     [Header("Кол-во собранных монет")]
     [SerializeField] private Text _viewCountMoney;
+    [SerializeField] private Text _titleCounter;
 
     public void SetMaxSaveSkydrivers(int count)
         => _countSavedSkydrivers.maxValue = count;
@@ -43,5 +44,6 @@ public class CounterManager : MonoBehaviour
         _viewCountMoney.text = "0";
         ContainerSaveerPlayerPrefs.Instance.SaveerData.GameMoney = 0;
         ContainerSaveerPlayerPrefs.Instance.SaveerData.CountSkydriver = 0;
+        _titleCounter.text = ContainerSaveerPlayerPrefs.Instance.SaveerData.TypeGame == 0 ? "Score:" : "Goal:";
     }
 }

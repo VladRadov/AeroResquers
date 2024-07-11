@@ -10,6 +10,7 @@ public class LevelEntity : Entity
 
     [Header("Components")]
     [SerializeField] private FrameMapEntity _frameMapEntityPrefab;
+    [SerializeField] private FrameMapEntity _airstripPrefab;
     [SerializeField] private List<SkydiverEntity> _skydiverEntities;
     [SerializeField] private MoneyEnetity _moneyEnetityPrefab;
     [SerializeField] private AirTunnelEntity _airTunnelEntityPrefab;
@@ -33,39 +34,47 @@ public class LevelEntity : Entity
 
         for (int i = 0; i < _startFramesMap; i++)
         {
-            var frameMap = Instantiate(_frameMapEntityPrefab, parent);
-            frameMap.Initialize(parent);
-            FrameMapView frameMapView = (FrameMapView)frameMap.View;
-
-            if (i % 2 == 0)
-                frameMap.Controller.RotateBack();
-
-            if (i != 0)
-                frameMap.Controller.UpdatePosition(i * new Vector3(frameMapView.Width, 0, 0));
-
-            frameMapView.OffsetFrameBack.Subscribe((frameMap) =>
+            if (i == 0)
             {
-                _levelController.ChangeLastFrameMap(frameMap);
-                InitializeSkydriver(frameMap);
-                InitializeMoney(frameMap);
-                InitializeAirTunnel(frameMap);
-                InitializeCloud(frameMap);
-                InitializeEnemy(frameMap);
-            });
-
-            if (i != 0)
-            {
-                InitializeSkydriver(frameMapView);
-                InitializeMoney(frameMapView);
-                InitializeAirTunnel(frameMapView);
-                InitializeCloud(frameMapView);
-                InitializeEnemy(frameMapView);
+                var frameMap = Instantiate(_airstripPrefab, parent);
+                frameMap.Initialize(parent);
             }
+            else
+            {
+                var frameMap = Instantiate(_frameMapEntityPrefab, parent);
+                frameMap.Initialize(parent);
+                FrameMapView frameMapView = (FrameMapView)frameMap.View;
 
-            if (i == _startFramesMap - 1)
-                _levelController.SetLastFrameMapEntity(frameMap.View.transform.localPosition);
+                if (i % 2 == 0)
+                    frameMap.Controller.RotateBack();
 
-            _levelController.AddFrameMapEntity(frameMap);
+                if (i != 0)
+                    frameMap.Controller.UpdatePosition(i * new Vector3(frameMapView.Width, 0, 0));
+
+                frameMapView.OffsetFrameBack.Subscribe((frameMap) =>
+                {
+                    _levelController.ChangeLastFrameMap(frameMap);
+                    InitializeSkydriver(frameMap);
+                    InitializeMoney(frameMap);
+                    InitializeAirTunnel(frameMap);
+                    InitializeCloud(frameMap);
+                    InitializeEnemy(frameMap);
+                });
+
+                if (i != 0)
+                {
+                    InitializeSkydriver(frameMapView);
+                    InitializeMoney(frameMapView);
+                    InitializeAirTunnel(frameMapView);
+                    InitializeCloud(frameMapView);
+                    InitializeEnemy(frameMapView);
+                }
+
+                if (i == _startFramesMap - 1)
+                    _levelController.SetLastFrameMapEntity(frameMap.View.transform.localPosition);
+
+                _levelController.AddFrameMapEntity(frameMap);
+            }
         }
     }
 
