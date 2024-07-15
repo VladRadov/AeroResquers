@@ -12,7 +12,8 @@ public class PlaneEntity : Entity
 
     [SerializeField] private PlaneView _planeViewPrefab;
     [SerializeField] private SkinPlane _skinPlane;
-    [SerializeField] private float _forceUp;
+    [SerializeField] private float _forceGravity;
+    [SerializeField] private float _maxHeight;
     [SerializeField] private float _speedIncreaseGravity;
     [SerializeField] private int _speedRotation;
     [SerializeField] private float _sensitivityRotation;
@@ -23,9 +24,9 @@ public class PlaneEntity : Entity
 
     public override void Initialize(Transform parent)
     {
-        _plane = new Plane(Vector2.up * _forceUp);
+        _plane = new Plane(Vector2.down * _forceGravity, _maxHeight);
         _planeView = Instantiate(_planeViewPrefab, parent);
-        _planeView.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(400, 420, 0));
+        _planeView.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(400, 480, 0));
         _planeView.transform.localPosition = new Vector3(_planeView.transform.localPosition.x, _planeView.transform.localPosition.y, 0);
 
        _planeController = new PlaneController(_plane, _planeView);

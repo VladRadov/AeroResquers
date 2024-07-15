@@ -51,7 +51,7 @@ public class LevelEntity : Entity
                 InitializeSkydriver(frameMap);
                 InitializeMoney(frameMap);
                 InitializeAirTunnel(frameMap);
-                InitializeCloud(frameMap);
+                //InitializeCloud(frameMap);
                 InitializeEnemy(frameMap);
             });
 
@@ -60,7 +60,7 @@ public class LevelEntity : Entity
                 InitializeSkydriver(frameMapView);
                 InitializeMoney(frameMapView);
                 InitializeAirTunnel(frameMapView);
-                InitializeCloud(frameMapView);
+                //InitializeCloud(frameMapView);
                 InitializeEnemy(frameMapView);
             }
 

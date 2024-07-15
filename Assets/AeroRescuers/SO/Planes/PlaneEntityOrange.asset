@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _planeViewPrefab: {fileID: 8146763211771152819, guid: 0fa19306e27347944b9cbe2f97f54282, type: 3}
   _skinPlane: {fileID: 11400000, guid: aef34851385ef6e47a7a0b7a9b3b73c6, type: 2}
-  _forceUp: 1.7
+  _forceGravity: 7
+  _maxHeight: 2.6
   _speedIncreaseGravity: 0.01
   _speedRotation: 5
   _sensitivityRotation: 0.1

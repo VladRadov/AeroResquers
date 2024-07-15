@@ -22,20 +22,17 @@ public class PlaneView : ViewEntity
 
     public void UpdateForce(Vector2 force)
     {
-        if(_rigidbody.bodyType == RigidbodyType2D.Dynamic)
-            _rigidbody.velocity = force;
+        var target = Vector3.Lerp(_rigidbody.velocity, force, 0.06f);
+        _rigidbody.velocity = target;
     }
 
-    public void SetBodyType(RigidbodyType2D bodyType)
-    {
-        if(_rigidbody != null)
-            _rigidbody.bodyType = bodyType;
-    }
+    public void SetBodyType(RigidbodyType2D rigidbodyType2D)
+        => _rigidbody.bodyType = rigidbodyType2D;
 
-    public void SetGravity(float value)
+    public void UpdatePosition(Vector2 newPosition)
     {
-        if (_rigidbody != null)
-            _rigidbody.gravityScale = value;
+        var target = Vector3.Lerp(transform.position, newPosition, 0.06f);
+        transform.position = target;
     }
 
     public void Rotation(Quaternion target)

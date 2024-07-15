@@ -10470,9 +10470,9 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.6
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -11307,7 +11307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 821d653c236eaed46b8c40d7e5bacf37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _price: 600
+  _price: 2
   _skinPlane: {fileID: 11400000, guid: 9f123f7afe61d5d438ddf104afdddfd0, type: 2}
   _priceView: {fileID: 688502032}
   _purchase: {fileID: 1263677005}
@@ -13212,7 +13212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 821d653c236eaed46b8c40d7e5bacf37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _price: 800
+  _price: 33
   _skinPlane: {fileID: 11400000, guid: aef34851385ef6e47a7a0b7a9b3b73c6, type: 2}
   _priceView: {fileID: 973932705}
   _purchase: {fileID: 296578931}

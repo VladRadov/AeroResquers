@@ -7,30 +7,21 @@ using UniRx;
 public class InputManager : MonoBehaviour
 {
     private InputMap _inputMap;
-    private bool _mouseHold;
 
     public ReactiveCommand OnMoveCommand = new();
+    public ReactiveCommand OnStopCommand = new();
 
     private void Awake()
     {
-        _mouseHold = false;
         _inputMap = new InputMap();
-        _inputMap.Map.Move.performed += (context) => { _mouseHold = true; };
-        _inputMap.Map.Move.canceled += (context) => { _mouseHold = false; };
+        _inputMap.Map.Move.performed += (context) => { OnMoveCommand.Execute(); };
+        _inputMap.Map.Move.canceled += (context) => { OnStopCommand.Execute(); };
     }
 
-    private async void OnHoldMouseButton()
+    private void Start()
     {
-        while (_mouseHold)
-        {
-            OnMoveCommand.Execute();
-            await Task.Delay(1000);
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        OnHoldMouseButton();
+        ManagerUniRx.AddObjectDisposable(OnMoveCommand);
+        ManagerUniRx.AddObjectDisposable(OnStopCommand);
     }
 
     private void OnEnable()
@@ -41,5 +32,11 @@ public class InputManager : MonoBehaviour
     private void OnDisable()
     {
         _inputMap.Disable();
+    }
+
+    private void OnDestroy()
+    {
+        ManagerUniRx.Dispose(OnMoveCommand);
+        ManagerUniRx.Dispose(OnStopCommand);
     }
 }

@@ -5,28 +5,31 @@ using UniRx;
 
 public class Plane
 {
-    private Vector2 _forceUp;
-    private Vector2 _forceDown;
+    private Vector2 _forceGravity;
+    private float _maxHeight;
+    private float _currentHeight;
     private bool _isFall;
     private bool _isFly;
 
-    public Plane(Vector2 startForce)
+    public Plane(Vector2 forceGravity, float maxHeight)
     {
-        _forceUp = startForce;
-        _forceDown = startForce;
+        _forceGravity = forceGravity;
+        _maxHeight = maxHeight;
         _isFall = false;
         _isFly = false;
     }
 
-    public Vector2 ForceUp => _forceUp;
-    public Vector2 ForceDown => _forceDown;
-    public Vector3 ForceFly => _forceUp + _forceDown;
+    public Vector2 ForceGravity => _forceGravity;
+    public float CurrentHeight => _currentHeight;
     public bool IsFall { get { return _isFall; } set { _isFall = value; } }
     public bool IsFly { get { return _isFly; } set { _isFly = value; } }
 
     public void LossHeight(float speedIncreaseGravity)
-        => _forceDown -= new Vector2(0, speedIncreaseGravity);
+        => _currentHeight -= speedIncreaseGravity;
+
+    public void ChangeRoute()
+        => _forceGravity *= -1;
 
     public void RecoveryHeight()
-        => _forceDown = _forceUp;
+        => _currentHeight = _maxHeight;
 }
