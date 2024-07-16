@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: FrameMapEntity 1
   m_EditorClassIdentifier: 
   _frameMapPreafb: {fileID: 6202562679091519834, guid: 887e8e15d3b138a418d2a0d1022b9a40, type: 3}
+  _enemyPrefabs:
+  - {fileID: 11400000, guid: 08747f8fff69b6840b92e2ab36d96856, type: 2}
   _distanceOffset: -25

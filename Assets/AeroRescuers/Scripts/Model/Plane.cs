@@ -1,5 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+using System.Threading.Tasks;
 using UnityEngine;
 using UniRx;
 
@@ -28,8 +28,29 @@ public class Plane
         => _currentHeight -= speedIncreaseGravity;
 
     public void ChangeRoute()
-        => _forceGravity *= -1;
+    {
+        if(IsFly)
+            _forceGravity *= -1;
+    }
 
-    public void RecoveryHeight()
-        => _currentHeight = _maxHeight;
+    public void Up()
+    {
+        if (_isFly)
+            _forceGravity = new Vector2(_forceGravity.x, Math.Abs(_forceGravity.y));
+    }
+
+    public void Down()
+    {
+        if (_isFly)
+            _forceGravity = new Vector2(_forceGravity.x, -Math.Abs(_forceGravity.y));
+    }
+
+    public async void RecoveryHeight(float speedIncrease)
+    {
+        while (_currentHeight < _maxHeight)
+        {
+            _currentHeight += speedIncrease;
+            await Task.Delay(1000);
+        }
+    }
 }

@@ -12,7 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8274287e6173e74180923845b927f02, type: 3}
   m_Name: LevelInfinityEntity
   m_EditorClassIdentifier: 
-  _frameMapEntityPrefab: {fileID: 11400000, guid: f9f1f727b71a7614b9df33c5d5e292cf, type: 2}
+  _framesMapEntityPrefab:
+  - {fileID: 11400000, guid: f9f1f727b71a7614b9df33c5d5e292cf, type: 2}
+  - {fileID: 11400000, guid: f9f1f727b71a7614b9df33c5d5e292cf, type: 2}
+  - {fileID: 11400000, guid: f9f1f727b71a7614b9df33c5d5e292cf, type: 2}
+  - {fileID: 11400000, guid: f9f1f727b71a7614b9df33c5d5e292cf, type: 2}
+  - {fileID: 11400000, guid: f9f1f727b71a7614b9df33c5d5e292cf, type: 2}
+  - {fileID: 11400000, guid: f9f1f727b71a7614b9df33c5d5e292cf, type: 2}
+  - {fileID: 11400000, guid: b81c5266da06e494797c00eaad5f46ec, type: 2}
+  - {fileID: 11400000, guid: 184fafb079a464b47adc3fc400168070, type: 2}
+  - {fileID: 11400000, guid: 184fafb079a464b47adc3fc400168070, type: 2}
+  - {fileID: 11400000, guid: 184fafb079a464b47adc3fc400168070, type: 2}
+  - {fileID: 11400000, guid: 184fafb079a464b47adc3fc400168070, type: 2}
+  - {fileID: 11400000, guid: 184fafb079a464b47adc3fc400168070, type: 2}
+  - {fileID: 11400000, guid: 184fafb079a464b47adc3fc400168070, type: 2}
+  - {fileID: 11400000, guid: b81c5266da06e494797c00eaad5f46ec, type: 2}
+  - {fileID: 11400000, guid: 88aada4c66c50204fada3b71119f1954, type: 2}
+  - {fileID: 11400000, guid: 88aada4c66c50204fada3b71119f1954, type: 2}
+  - {fileID: 11400000, guid: 88aada4c66c50204fada3b71119f1954, type: 2}
+  - {fileID: 11400000, guid: 88aada4c66c50204fada3b71119f1954, type: 2}
+  - {fileID: 11400000, guid: 88aada4c66c50204fada3b71119f1954, type: 2}
+  - {fileID: 11400000, guid: 88aada4c66c50204fada3b71119f1954, type: 2}
+  - {fileID: 11400000, guid: b81c5266da06e494797c00eaad5f46ec, type: 2}
   _airstripPrefab: {fileID: 11400000, guid: a14cd50bbe84b8e4e8231f103845f8de, type: 2}
   _skydiverEntities:
   - {fileID: 11400000, guid: 92ba8e1efa4b7d04597c7599888bf15f, type: 2}
@@ -28,5 +49,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 913f5ede17c20fe40b9dcd7c9b3dd785, type: 2}
   - {fileID: 11400000, guid: 08747f8fff69b6840b92e2ab36d96856, type: 2}
   _number: 0
-  _startFramesMap: 6
+  _startFramesMap: -1
   _countMaxSkydrivers: 0

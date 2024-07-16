@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8274287e6173e74180923845b927f02, type: 3}
   m_Name: LevelEntity 10
   m_EditorClassIdentifier: 
-  _frameMapEntityPrefab: {fileID: 11400000, guid: 184fafb079a464b47adc3fc400168070, type: 2}
+  _framesMapEntityPrefab:
+  - {fileID: 11400000, guid: 184fafb079a464b47adc3fc400168070, type: 2}
   _airstripPrefab: {fileID: 11400000, guid: 788d24c174f92754689444b4cd79a80e, type: 2}
   _skydiverEntities:
   - {fileID: 11400000, guid: 92ba8e1efa4b7d04597c7599888bf15f, type: 2}

@@ -16,8 +16,11 @@ public class PlaneController
         _planeView = planeView;
     }
 
-    public void ChangeRoute()
-        => _plane.ChangeRoute();
+    public void Up()
+        => _plane.Up();
+
+    public void Down()
+        => _plane.Down();
 
     public void RotationPlane(int speedRotation, float sensitivityRotation)
     {
@@ -29,6 +32,7 @@ public class PlaneController
     {
         _planeView.SetBodyType(RigidbodyType2D.Static);
         AudioManager.Instance.StopSoundEnginePlane();
+        AudioManager.Instance.StopSoundPlaneFall();
     }
 
     public void SetPlaneDynamic()
@@ -37,19 +41,19 @@ public class PlaneController
         AudioManager.Instance.PlayEnginePlane();
     }
 
-    public void LossHeight(float speedIncreaseGravity)
+    public void LossHeight(float speedIncreaseGravity, float sensitivityChangeVelocity, float sensitivityChangePosition)
     {
         if (_plane.CurrentHeight > 0)
             _plane.IsFall = false;
-        else if(_plane.CurrentHeight <= 0 && _plane.IsFall == false)
+        else if (_plane.CurrentHeight <= 0 && _plane.IsFall == false)
         {
             _plane.IsFall = true;
             AudioManager.Instance.PlayAirplaneFall();
         }
 
         _plane.LossHeight(speedIncreaseGravity);
-        _planeView.UpdatePosition(new Vector2(_planeView.transform.position.x, _plane.CurrentHeight));
-        _planeView.UpdateForce(_plane.ForceGravity);
+        _planeView.UpdatePosition(new Vector2(_planeView.transform.position.x, _plane.CurrentHeight), sensitivityChangePosition);
+        _planeView.UpdateForce(_plane.ForceGravity, sensitivityChangeVelocity);
     }
 
     public async void StartFly()
@@ -57,8 +61,9 @@ public class PlaneController
         AudioManager.Instance.PlayEnginePlane();
         _tragetPosition = new Vector3(-193, 28, 0);
         _planeView.PlayAnimationUp();
-        await Task.Delay(4000);
+        await Task.Delay(2000);
         _plane.IsFly = true;
+        SetPlaneDynamic();
     }
 
     public void Flying()
@@ -67,6 +72,6 @@ public class PlaneController
         _planeView.UpdateLocalPosition(target);
     }
 
-    public void RecoveryHeight()
-        => _plane.RecoveryHeight();
+    public void RecoveryHeight(float speedIncreaseGravity)
+        => _plane.RecoveryHeight(speedIncreaseGravity);
 }

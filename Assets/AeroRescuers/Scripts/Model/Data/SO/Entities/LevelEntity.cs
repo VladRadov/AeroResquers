@@ -9,13 +9,12 @@ public class LevelEntity : Entity
     private LevelController _levelController;
 
     [Header("Components")]
-    [SerializeField] private FrameMapEntity _frameMapEntityPrefab;
+    [SerializeField] private List<FrameMapEntity> _framesMapEntityPrefab;
     [SerializeField] private FrameMapEntity _airstripPrefab;
     [SerializeField] private List<SkydiverEntity> _skydiverEntities;
     [SerializeField] private MoneyEnetity _moneyEnetityPrefab;
     [SerializeField] private AirTunnelEntity _airTunnelEntityPrefab;
     [SerializeField] private List<CloudEntity> _cloudEntityPrefab;
-    [SerializeField] private List<Entity> _enemyPrefabs;
     [Header("Other settings")]
     [SerializeField] private int _number;
     [SerializeField] private int _startFramesMap;
@@ -35,9 +34,9 @@ public class LevelEntity : Entity
         var airstripFrameMap = Instantiate(_airstripPrefab, parent);
         airstripFrameMap.Initialize(parent);
 
-        for (int i = 0; i < _startFramesMap; i++)
+        for (int i = 0; i < (_startFramesMap == -1 ? _framesMapEntityPrefab.Count : _startFramesMap); i++)
         {
-            var frameMap = Instantiate(_frameMapEntityPrefab, parent);
+            var frameMap = Instantiate(_framesMapEntityPrefab[_startFramesMap == -1 ? i : 0], parent);
             frameMap.Initialize(parent);
             FrameMapView frameMapView = (FrameMapView)frameMap.View;
 
@@ -45,26 +44,25 @@ public class LevelEntity : Entity
                 frameMap.Controller.RotateBack();
             
             frameMap.Controller.UpdatePosition((i + 1) * new Vector3(frameMapView.Width, 0, 0));
-            frameMapView.OffsetFrameBack.Subscribe((frameMap) =>
+            frameMapView.OffsetFrameBack.Subscribe((frameMapTemp) =>
             {
-                _levelController.ChangeLastFrameMap(frameMap);
-                InitializeSkydriver(frameMap);
-                InitializeMoney(frameMap);
-                InitializeAirTunnel(frameMap);
-                //InitializeCloud(frameMap);
-                InitializeEnemy(frameMap);
+                _levelController.ChangeLastFrameMap(frameMapTemp);
+                InitializeSkydriver(frameMapTemp);
+                InitializeMoney(frameMapTemp);
+                InitializeAirTunnel(frameMapTemp);
+                InitializeCloud(frameMapTemp);
+                frameMap.InitializeEnemy();
             });
 
-            if (i != 0)
+            if ((frameMap.View is FrameMapTransitionView) == false)
             {
                 InitializeSkydriver(frameMapView);
                 InitializeMoney(frameMapView);
                 InitializeAirTunnel(frameMapView);
-                //InitializeCloud(frameMapView);
-                InitializeEnemy(frameMapView);
+                InitializeCloud(frameMapView);
             }
 
-            if (i == _startFramesMap - 1)
+            if (i == (_startFramesMap == -1 ? _framesMapEntityPrefab.Count - 1 : _startFramesMap - 1))
                 _levelController.SetLastFrameMapEntity(frameMap.View.transform.localPosition);
 
             _levelController.AddFrameMapEntity(frameMap);
@@ -137,26 +135,6 @@ public class LevelEntity : Entity
             var cloud = _cloudEntityPrefab[indexCloud];
             cloud.Initialize(frameMap.transform);
             cloud.View.transform.localPosition = new Vector3(x, cloud.View.transform.localPosition.y, 0);
-        }
-    }
-
-    private void InitializeEnemy(FrameMapView frameMap)
-    {
-        var count = ContainerSaveerPlayerPrefs.Instance.SaveerData.TypeGame == 0 ? Random.Range(0, _enemyPrefabs.Count) : _enemyPrefabs.Count;
-
-        for (int i = 0; i < count; i++)
-        {
-            var x = Random.Range(-frameMap.Width / 4, frameMap.Width / 4);
-            float y = (frameMap.Height / 2) - 10;
-
-            var indexEnemy = Random.Range(0, _enemyPrefabs.Count);
-
-            if (_enemyPrefabs[indexEnemy] is WaveEntity)
-                y = Random.Range(-frameMap.Height / 4, - frameMap.Height / 2);
-
-            var wave = Instantiate(_enemyPrefabs[indexEnemy]);
-            wave.Initialize(frameMap.transform);
-            wave.View.transform.localPosition = new Vector3(x, y, 0);
         }
     }
 }

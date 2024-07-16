@@ -14,7 +14,10 @@ public class PlaneEntity : Entity
     [SerializeField] private SkinPlane _skinPlane;
     [SerializeField] private float _forceGravity;
     [SerializeField] private float _maxHeight;
-    [SerializeField] private float _speedIncreaseGravity;
+    [SerializeField] private float _speedIncreaseHeight;
+    [SerializeField] private float _speedIncreaseHeightMax;
+    [SerializeField] private float _sensitivityChangeVelocity;
+    [SerializeField] private float _sensitivityChangePosition;
     [SerializeField] private int _speedRotation;
     [SerializeField] private float _sensitivityRotation;
 
@@ -30,14 +33,14 @@ public class PlaneEntity : Entity
         _planeView.transform.localPosition = new Vector3(_planeView.transform.localPosition.x, _planeView.transform.localPosition.y, 0);
 
        _planeController = new PlaneController(_plane, _planeView);
-        _planeView.OnCollisionAirTunnelCommand.Subscribe(_ => { _planeController.RecoveryHeight(); });
+        _planeView.OnCollisionAirTunnelCommand.Subscribe(_ => { _planeController.RecoveryHeight(_speedIncreaseHeightMax); });
     }
 
     public override void FixedUpdate()
     {
         if (_plane.IsFly)
         {
-            _planeController.LossHeight(_speedIncreaseGravity);
+            _planeController.LossHeight(_speedIncreaseHeight, _sensitivityChangeVelocity, _sensitivityChangePosition);
             _planeController.RotationPlane(_speedRotation, _sensitivityRotation);
         }
         else

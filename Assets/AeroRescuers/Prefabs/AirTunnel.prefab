@@ -135,6 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10777be7f5296eb498170777ccb6ba1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _csDestroyEffect: {fileID: 114000011644435202, guid: 738d308a031b2664bb0f9ebcfefb2da9, type: 3}
 --- !u!95 &5874081428541382145
 Animator:
   serializedVersion: 5

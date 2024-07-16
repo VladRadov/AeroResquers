@@ -136,6 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 5
+  _csDestroyEffect: {fileID: 114000010532599362, guid: ba4d2d4d346b55a4da5ee8548c8c5609, type: 3}
 --- !u!95 &7101238710640378533
 Animator:
   serializedVersion: 5

@@ -20,18 +20,18 @@ public class PlaneView : ViewEntity
     public void SetSkin(Sprite skin)
         => _skin.sprite = skin;
 
-    public void UpdateForce(Vector2 force)
+    public void UpdateForce(Vector2 force, float sensitivityChangeVelocity)
     {
-        var target = Vector3.Lerp(_rigidbody.velocity, force, 0.06f);
+        var target = Vector3.Lerp(_rigidbody.velocity, force, sensitivityChangeVelocity);
         _rigidbody.velocity = target;
     }
 
     public void SetBodyType(RigidbodyType2D rigidbodyType2D)
         => _rigidbody.bodyType = rigidbodyType2D;
 
-    public void UpdatePosition(Vector2 newPosition)
+    public void UpdatePosition(Vector2 newPosition, float sensitivityChangePosition)
     {
-        var target = Vector3.Lerp(transform.position, newPosition, 0.06f);
+        var target = Vector3.Lerp(transform.position, newPosition, sensitivityChangePosition);
         transform.position = target;
     }
 
@@ -46,23 +46,22 @@ public class PlaneView : ViewEntity
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         var skydriver = collision.gameObject.GetComponent<SkydiverView>();
         if (skydriver != null)
         {
             AudioManager.Instance.PlayCaughtSkydriver();
+            skydriver.CreateDestroyEffect();
             skydriver.SetActive(false);
             SaveSkydriverCommand.Execute();
         }
-    }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
         var money = collision.gameObject.GetComponent<MoneyView>();
         if (money != null)
         {
             AudioManager.Instance.PlayCoin();
+            money.CreateDestroyEffect();
             money.SetActive(false);
             GetMoneyCommand.Execute();
         }
@@ -75,6 +74,7 @@ public class PlaneView : ViewEntity
             else if (enemy is StoneView)
             {
                 AudioManager.Instance.PlayAttackStone();
+                enemy.CreateDestroyEffect();
                 enemy.gameObject.SetActive(false);
             }
             else if (enemy is WaveView)
@@ -87,9 +87,9 @@ public class PlaneView : ViewEntity
         if (airTunnel != null)
         {
             AudioManager.Instance.PlayAirplaneTunnel();
+            airTunnel.CreateDestroyEffect();
             airTunnel.SetActive(false);
             OnCollisionAirTunnelCommand.Execute();
-            //PlayAnimationUp();
         }
 
         var cloud = collision.gameObject.GetComponent<CloudView>();

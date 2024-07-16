@@ -67,10 +67,16 @@ public class GameManager : MonoBehaviour
         PlaneView viewPlane = (PlaneView)plane.View;
         viewPlane.SaveSkydriverCommand.Subscribe(_ => { _counterManager.IncreaseCountSkydrivers(); });
         viewPlane.GetMoneyCommand.Subscribe(_ => { _counterManager.IncreaseCountMoney(); });
-        viewPlane.GetDamageCommand.Subscribe(damage => { if (_isPause) return; _healthManager.Damage(damage); Vibration(); });
+        viewPlane.GetDamageCommand.Subscribe(damage =>
+        {
+            if (_isPause)
+                return;
+            
+            _healthManager.Damage(damage); Vibration();
+        });
         viewPlane.OnDisappearedWithMapCommand.Subscribe(_ => { _healthManager.Die(); });
-        _inputManager.OnMoveCommand.Subscribe(_ => { plane.Controller.ChangeRoute(); });
-        _inputManager.OnStopCommand.Subscribe(_ => { plane.Controller.ChangeRoute(); });
+        _inputManager.OnMoveCommand.Subscribe(_ => { plane.Controller.Up(); });
+        _inputManager.OnStopCommand.Subscribe(_ => { plane.Controller.Down(); });
 
         _pause.onClick.AddListener(() =>
         {
@@ -84,7 +90,11 @@ public class GameManager : MonoBehaviour
             _isPause = false;
             plane.Controller.StartFly();
         });
-        _panelPauseView.OnContinueGameCommand.Subscribe(_ => { OnContinueGame(); plane.Controller.SetPlaneDynamic(); });
+        _panelPauseView.OnContinueGameCommand.Subscribe(_ =>
+        {
+            OnContinueGame();
+            plane.Controller.SetPlaneDynamic();
+        });
 
         _isPause = true;
         plane.Controller.SetPlaneStatic();
