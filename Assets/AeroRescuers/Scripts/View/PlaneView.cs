@@ -74,12 +74,12 @@ public class PlaneView : ViewEntity
             else if (enemy is StoneView)
             {
                 AudioManager.Instance.PlayAttackStone();
-                enemy.CreateDestroyEffect();
                 enemy.gameObject.SetActive(false);
             }
             else if (enemy is WaveView)
                 AudioManager.Instance.PlayAttackWave();
 
+            enemy.CreateDestroyEffect(transform);
             GetDamageCommand.Execute(enemy.Damage);
         }
 

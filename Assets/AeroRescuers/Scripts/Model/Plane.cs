@@ -50,7 +50,7 @@ public class Plane
         while (_currentHeight < _maxHeight)
         {
             _currentHeight += speedIncrease;
-            await Task.Delay(1000);
+            await Task.Delay(100);
         }
     }
 }

@@ -9,9 +9,9 @@ public class EnemyView : ViewEntity
 
     public float Damage => _damage;
 
-    public void CreateDestroyEffect()
+    public void CreateDestroyEffect(Transform parent)
     {
-        var destroyEffect = Instantiate(_csDestroyEffect, transform.position, Quaternion.identity);
+        var destroyEffect = Instantiate(_csDestroyEffect, parent);
         destroyEffect.transform.position = new Vector3(destroyEffect.transform.position.x, destroyEffect.transform.position.y, 0);
     }
 }

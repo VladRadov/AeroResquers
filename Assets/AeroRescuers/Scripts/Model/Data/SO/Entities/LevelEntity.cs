@@ -44,14 +44,19 @@ public class LevelEntity : Entity
                 frameMap.Controller.RotateBack();
             
             frameMap.Controller.UpdatePosition((i + 1) * new Vector3(frameMapView.Width, 0, 0));
-            frameMapView.OffsetFrameBack.Subscribe((frameMapTemp) =>
+            frameMapView.OffsetFrameBack.Subscribe((frameMapEntity) =>
             {
-                _levelController.ChangeLastFrameMap(frameMapTemp);
-                InitializeSkydriver(frameMapTemp);
-                InitializeMoney(frameMapTemp);
-                InitializeAirTunnel(frameMapTemp);
-                InitializeCloud(frameMapTemp);
-                frameMap.InitializeEnemy();
+                var frameMapView = (FrameMapView)frameMapEntity.View;
+                _levelController.ChangeLastFrameMap(frameMapView);
+
+                if ((frameMap.View is FrameMapTransitionView) == false)
+                {
+                    InitializeSkydriver(frameMapView);
+                    InitializeMoney(frameMapView);
+                    InitializeAirTunnel(frameMapView);
+                    InitializeCloud(frameMapView);
+                    frameMap.InitializeEnemy();
+                }
             });
 
             if ((frameMap.View is FrameMapTransitionView) == false)

@@ -12,7 +12,7 @@ public class FrameMapView : ViewEntity
     public float Width => _rectTransform.rect.width;
     public float Height => _rectTransform.rect.height;
     public Vector3 Position => _transform.position;
-    public ReactiveCommand<FrameMapView> OffsetFrameBack = new();
+    public ReactiveCommand<FrameMapEntity> OffsetFrameBack = new();
 
     private void Awake()
     {

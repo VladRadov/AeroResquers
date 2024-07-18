@@ -26,7 +26,7 @@ public class FrameMapEntity : Entity
     public override void FixedUpdate()
     {
         if(_frameMapView.Position.x < _distanceOffset)
-            _frameMapView.OffsetFrameBack.Execute(_frameMapView);
+            _frameMapView.OffsetFrameBack.Execute(this);
     }
 
     public override void AddObjectDisposable()

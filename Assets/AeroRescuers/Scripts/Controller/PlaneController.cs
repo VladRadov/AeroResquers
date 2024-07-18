@@ -7,7 +7,6 @@ public class PlaneController
 {
     private Plane _plane;
     private PlaneView _planeView;
-    private const int _speedRotation = 5;
     private Vector3 _tragetPosition;
 
     public PlaneController(Plane plane, PlaneView planeView)
